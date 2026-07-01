@@ -1,0 +1,645 @@
+/* ===========================
+   GLOBAL
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#f4f7fb;
+
+    color:#222;
+
+}
+
+.container{
+
+    padding:20px;
+
+    padding-bottom:110px;
+
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.top-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+.top-header h2{
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.top-header p{
+
+    color:#777;
+
+    font-size:14px;
+
+    margin-top:4px;
+
+}
+
+.icon-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+.icon-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ===========================
+   PROFILE CARD
+=========================== */
+
+.profile-card{
+
+    background:linear-gradient(135deg,#2563eb,#4f7fff);
+
+    color:#fff;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:22px;
+
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+
+}
+
+.profile-avatar{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.25);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+}
+
+.profile-info h3{
+
+    font-size:22px;
+
+    margin-bottom:5px;
+
+}
+
+.profile-info p{
+
+    opacity:.9;
+
+}
+
+.profile-info small{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:14px;
+
+    color:rgba(255,255,255,.9);
+
+}
+
+/* ===========================
+   SETTINGS CARDS
+=========================== */
+
+.setting-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.setting-card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.setting-card i{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:22px;
+
+    background:#EEF4FF;
+
+    color:#2563eb;
+
+}
+
+.setting-card h3{
+
+    font-size:18px;
+
+    margin-bottom:4px;
+
+}
+
+.setting-card p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.setting-card.logout i{
+
+    background:#FEE2E2;
+
+    color:#DC2626;
+
+}
+
+.setting-card.logout h3{
+
+    color:#DC2626;
+
+}
+
+/* ===========================
+   VERSION
+=========================== */
+
+.version{
+
+    text-align:center;
+
+    color:#888;
+
+    margin-top:25px;
+
+    margin-bottom:25px;
+
+}
+
+.version h3{
+
+    color:#2563eb;
+
+    margin-bottom:8px;
+
+}
+
+/* ===========================
+   COMMON BOTTOM NAVIGATION
+=========================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:15px;
+
+    right:15px;
+
+    bottom:15px;
+
+    height:72px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    z-index:999;
+
+}
+
+.nav-item{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:4px;
+
+    color:#777;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.nav-item i{
+
+    font-size:20px;
+
+}
+
+.nav-item span{
+
+    font-size:12px;
+
+    font-weight:500;
+
+}
+
+.nav-item.active{
+
+    color:#2563eb;
+
+    transform:translateY(-6px);
+
+}
+
+.nav-item.active i{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 8px 20px rgba(37,99,235,.35);
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.profile-card{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.setting-card{
+
+    padding:16px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.top-header h2{
+
+    font-size:20px;
+
+}
+
+.profile-info h3{
+
+    font-size:18px;
+
+}
+
+.setting-card h3{
+
+    font-size:16px;
+
+}
+
+.setting-card p{
+
+    font-size:13px;
+
+}
+
+}
+
+.developer-link{
+
+    color:#2563eb;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.developer-link:hover{
+
+    color:#1d4ed8;
+
+    text-decoration:underline;
+
+}
+
+/* ===========================
+   BOTTOM SHEET
+=========================== */
+
+.bottom-sheet{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:-100%;
+
+    background:#fff;
+
+    border-radius:25px 25px 0 0;
+
+    box-shadow:0 -10px 30px rgba(0,0,0,.15);
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+.bottom-sheet.show{
+
+    bottom:0;
+
+}
+
+.sheet-content{
+
+    padding:25px;
+
+}
+
+.sheet-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.sheet-header button{
+
+    border:none;
+
+    background:none;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+.save-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    margin-top:15px;
+
+}
+
+.cancel-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    background:#eee;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+}
+
+.overlay{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    top:0;
+
+    bottom:0;
+
+    background:rgba(0,0,0,.4);
+
+    display:none;
+
+    z-index:9998;
+
+}
+
+.overlay.show{
+
+    display:block;
+
+}
+
+.sheet-content input,
+.sheet-content textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.sheet-content textarea{
+
+    height:90px;
+
+    resize:none;
+
+}
+
+/* ===========================
+   PASSWORD INPUT
+=========================== */
+
+.password-box{
+
+    position:relative;
+
+    margin-bottom:15px;
+
+}
+
+.password-box input{
+
+    width:100%;
+
+    padding:14px 45px 14px 14px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.password-box i{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    color:#777;
+
+    transition:.3s;
+
+}
+
+.password-box i:hover{
+
+    color:#2563eb;
+
+}

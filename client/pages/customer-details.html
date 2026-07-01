@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Customer Details</title>
+
+<link rel="stylesheet"
+href="../assets/css/style.css">
+
+<link rel="stylesheet"
+href="../assets/css/customer-details.css">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Header -->
+
+<div class="header">
+
+<button class="back-btn"
+onclick="history.back()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+</button>
+
+<div class="customer-info">
+
+<h2 id="customerName">
+
+Customer
+
+</h2>
+
+<p id="customerMobile">
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Summary -->
+
+<div class="summary-card">
+
+<h1 id="pendingAmount">
+
+₹0
+
+</h1>
+
+<p>
+
+Outstanding
+
+</p>
+
+</div>
+
+<div class="summary-grid">
+
+<div class="box">
+
+<h3 id="totalBusiness">
+
+₹0
+
+</h3>
+
+<span>
+
+Business
+
+</span>
+
+</div>
+
+<div class="box">
+
+<h3 id="receivedAmount">
+
+₹0
+
+</h3>
+
+<span>
+
+Received
+
+</span>
+
+</div>
+
+<div class="box">
+
+<h3 id="workCount">
+
+0
+
+</h3>
+
+<span>
+
+Works
+
+</span>
+
+</div>
+
+</div>
+
+<!-- Works -->
+
+<div class="section-title">
+
+Works
+
+</div>
+
+<div id="workList">
+
+</div>
+
+<!-- Floating Button -->
+
+<button
+class="fab"
+onclick="addNewWork()">
+
+    <i class="fa-solid fa-plus"></i>
+
+</button>
+
+</div>
+<!-- Bottom Sheet -->
+
+<div
+class="bottom-sheet"
+id="workMenu">
+
+<div class="sheet">
+
+<div class="sheet-header">
+
+<h2>
+
+Work Options
+
+</h2>
+
+<button
+onclick="closeWorkMenu()">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<button
+class="sheet-btn"
+onclick="editWork()">
+
+<i class="fa-solid fa-pen"></i>
+
+Edit Work
+
+</button>
+
+<button
+class="sheet-btn"
+onclick="openStatusModal()">
+
+<i class="fa-solid fa-list-check"></i>
+
+Update Status
+
+</button>
+
+<button
+class="sheet-btn"
+onclick="addPayment()">
+
+<i class="fa-solid fa-wallet"></i>
+
+Add Payment
+
+</button>
+
+<button
+class="sheet-btn"
+onclick="openLedgerFromMenu()">
+
+<i class="fa-solid fa-book"></i>
+
+Ledger
+
+</button>
+
+<button
+class="sheet-btn"
+onclick="printInvoice()">
+
+<i class="fa-solid fa-file-invoice"></i>
+
+Print Invoice
+
+</button>
+
+<button
+class="sheet-btn"
+onclick="uploadPhoto()">
+
+<i class="fa-solid fa-camera"></i>
+
+Upload Photos
+
+</button>
+
+<button
+class="sheet-btn delete"
+onclick="deleteWork()">
+
+<i class="fa-solid fa-trash"></i>
+
+Delete Work
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ================= STATUS MODAL ================= -->
+
+<div class="bottom-sheet" id="statusModal">
+
+    <div class="sheet">
+
+        <div class="sheet-header">
+
+            <h2>Update Work Status</h2>
+
+            <button onclick="closeStatusModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <select id="workStatus">
+
+            <option>Draft</option>
+
+            <option>Order Confirmed</option>
+
+            <option>In Progress</option>
+
+            <option>Finishing</option>
+
+            <option>Ready</option>
+
+            <option>Delivered</option>
+
+            <option>Closed</option>
+
+            <option>Cancelled</option>
+
+        </select>
+
+        <br><br>
+
+        <button
+            class="sheet-btn"
+            onclick="saveStatus()">
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            Save Status
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="../assets/js/guard.js"></script>
+<script src="../assets/js/customer-details.js"></script>
+
+</body>
+
+</html>

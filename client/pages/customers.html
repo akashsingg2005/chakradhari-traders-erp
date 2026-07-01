@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Customers</title>
+
+    <link rel="stylesheet"
+        href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+        href="../assets/css/customer.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="app-header">
+
+    <button
+        class="icon-btn"
+        onclick="location.href='../dashboard.html'">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+    </button>
+
+    <div class="header-title">
+
+        <h2>Customers</h2>
+
+        <small id="businessName">
+
+            Loading Business...
+
+        </small>
+
+    </div>
+
+    <button
+        class="icon-btn"
+        onclick="loadCustomers()">
+
+        <i class="fa-solid fa-rotate-right"></i>
+
+    </button>
+
+</header>
+
+<div class="container">
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            id="search"
+            type="text"
+            placeholder="Search by Name, Mobile or Email">
+
+    </div>
+
+    <!-- Statistics -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <h2 id="customerCount">0</h2>
+
+            <p>Customers</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="pendingTotal">₹0</h2>
+
+            <p>Outstanding</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="receivedTotal">₹0</h2>
+
+            <p>Received</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="workCount">0</h2>
+
+            <p>Works</p>
+
+        </div>
+
+    </section>
+
+    <!-- Customer List -->
+
+    <div id="customerList">
+
+        <div class="customer-card empty">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h3>Loading Customers...</h3>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Floating Button -->
+
+<button
+    class="fab"
+    onclick="openForm()">
+
+    <i class="fa-solid fa-user-plus"></i>
+
+</button>
+
+<!-- =========================
+     CUSTOMER MODAL
+========================= -->
+<div
+class="bottom-sheet"
+id="customerModal">
+
+<div class="sheet-content">
+
+<div class="sheet-header">
+
+<h2 id="formTitle">
+
+Add Customer
+
+</h2>
+
+<button
+type="button"
+onclick="closeForm()">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<input
+id="name"
+type="text"
+placeholder="Customer Name">
+
+<input
+id="mobile"
+type="tel"
+placeholder="Mobile Number">
+
+<input
+id="email"
+type="email"
+placeholder="Email Address">
+
+<textarea
+id="address"
+placeholder="Customer Address"></textarea>
+
+<div class="form-row">
+
+
+</div>
+
+<textarea
+id="notes"
+placeholder="Notes (Optional)"></textarea>
+
+<button
+class="save-btn"
+onclick="saveCustomer()">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+<span id="saveText">
+
+Add Customer
+
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================
+     ACTION SHEET
+========================= -->
+
+<div
+class="bottom-sheet"
+id="actionSheet">
+
+<div class="sheet-content">
+
+<div class="sheet-header">
+
+<h2 id="actionCustomerName">
+
+Customer
+
+</h2>
+
+<button
+onclick="closeActionSheet()">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<button
+class="action-btn"
+onclick="viewLedger()">
+
+<i class="fa-solid fa-folder-open"></i>
+
+View Customer
+
+</button>
+
+<button
+class="action-btn"
+onclick="createWork()">
+
+<i class="fa-solid fa-briefcase"></i>
+
+New Work
+
+</button>
+
+<button
+class="action-btn"
+onclick="callCustomer()">
+
+<i class="fa-solid fa-phone"></i>
+
+Call
+
+</button>
+
+<button
+class="action-btn"
+onclick="whatsappCustomer()">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+WhatsApp
+
+</button>
+
+<button
+class="action-btn"
+onclick="editSelectedCustomer()">
+
+<i class="fa-solid fa-pen"></i>
+
+Edit Customer
+
+</button>
+
+<button
+class="action-btn danger"
+onclick="deleteSelectedCustomer()">
+
+<i class="fa-solid fa-trash"></i>
+
+Delete Customer
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================= -->
+
+<nav class="bottom-nav">
+
+<div
+class="nav-item"
+onclick="location.href='../dashboard.html'">
+
+<i class="fa-solid fa-house"></i>
+
+<span>Home</span>
+
+</div>
+
+<div class="nav-item active">
+
+<i class="fa-solid fa-users"></i>
+
+<span>Customers</span>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='expense.html'">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Expense</span>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='reports.html'">
+
+<i class="fa-solid fa-chart-column"></i>
+
+<span>Reports</span>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='settings.html'">
+
+<i class="fa-solid fa-gear"></i>
+
+<span>More</span>
+
+</div>
+
+</nav>
+
+<script src="../assets/js/guard.js"></script>
+
+<script src="../assets/js/customer.js"></script>
+
+</body>
+
+</html>

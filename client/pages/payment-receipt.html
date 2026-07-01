@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment Receipt</title>
+
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<link rel="stylesheet" href="../assets/css/payment-receipt.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="receipt-container" id="receipt">
+
+    <div class="receipt-header">
+
+        <h1 id="businessName">Business Name</h1>
+
+        <p id="businessAddress"></p>
+
+        <p id="businessMobile"></p>
+
+    </div>
+
+    <hr>
+
+    <div class="receipt-info">
+
+        <div>
+
+            <strong>Receipt No.</strong>
+
+            <p id="receiptNo"></p>
+
+        </div>
+
+        <div>
+
+            <strong>Date</strong>
+
+            <p id="receiptDate"></p>
+
+        </div>
+
+    </div>
+
+    <div class="customer-box">
+
+        <h3>Received From</h3>
+
+        <p id="customerName"></p>
+
+        <p id="customerMobile"></p>
+
+    </div>
+
+    <div class="payment-box">
+
+        <div>
+
+            <span>Payment Method</span>
+
+            <strong id="paymentMethod"></strong>
+
+        </div>
+
+        <div>
+
+            <span>Reference No.</span>
+
+            <strong id="referenceNo"></strong>
+
+        </div>
+
+        <div>
+
+            <span>Amount Received</span>
+
+            <strong id="amount"></strong>
+
+        </div>
+
+        <div>
+
+            <span>Remarks</span>
+
+            <strong id="notes"></strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="buttons">
+
+    <button onclick="window.print()">
+
+        🖨 Print
+
+    </button>
+
+    <button id="downloadBtn">
+
+        ⬇ Download PDF
+
+    </button>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script src="../assets/js/payment-receipt.js"></script>
+
+</body>
+
+</html>

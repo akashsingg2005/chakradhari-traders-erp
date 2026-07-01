@@ -1,0 +1,255 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    padding:30px;
+}
+
+.receipt-container{
+    width:100%;
+    max-width:760px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    box-sizing:border-box;
+    border-radius:12px;
+}
+
+.receipt-header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.receipt-header h1{
+
+    color:#2563eb;
+
+    margin-bottom:10px;
+
+    font-size:32px;
+
+}
+
+.receipt-header p{
+
+    color:#666;
+
+    margin:4px 0;
+
+}
+
+.receipt-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:30px 0;
+
+}
+
+.receipt-info strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+}
+
+.customer-box{
+
+    margin:25px 0;
+
+}
+
+.customer-box h3{
+
+    color:#2563eb;
+
+    margin-bottom:10px;
+
+}
+
+.customer-box p{
+
+    margin:4px 0;
+
+    color:#444;
+
+}
+
+.payment-box{
+
+    margin-top:30px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+.payment-box div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:15px 20px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.payment-box div:last-child{
+
+    border-bottom:none;
+
+}
+
+.payment-box span{
+
+    color:#6b7280;
+
+}
+
+.payment-box strong{
+
+    color:#111827;
+
+}
+
+.buttons{
+
+    margin:25px auto;
+
+    max-width:850px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+}
+
+.buttons button{
+
+    padding:14px 28px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.buttons button:hover{
+
+    background:#1d4ed8;
+
+}
+
+@page{
+
+    size:A4;
+
+    margin:10mm;
+
+}
+
+@media print{
+
+    body{
+
+        background:#fff;
+
+        padding:0;
+
+    }
+
+    .buttons{
+
+        display:none;
+
+    }
+
+    .receipt-container{
+
+        width:100%;
+
+        max-width:100%;
+
+        box-shadow:none;
+
+        border-radius:0;
+
+    }
+
+}
+
+@page{
+
+    size:A4;
+
+    margin:10mm;
+
+}
+
+.receipt-container{
+
+    page-break-after:auto;
+
+}
+
+.payment-box{
+
+    page-break-inside:avoid;
+
+}
+
+.customer-box{
+
+    page-break-inside:avoid;
+
+}
+
+table{
+
+    page-break-inside:auto;
+
+}
+
+tr{
+
+    page-break-inside:avoid;
+
+}
+
+table{
+    width:100%;
+    table-layout:fixed;
+    word-wrap:break-word;
+}
+
+*{
+    max-width:100%;
+}

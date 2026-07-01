@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Business Reports</title>
+
+    <link rel="stylesheet"
+        href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+        href="../assets/css/reports.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ===========================
+         HEADER
+    =========================== -->
+
+    <header class="top-header">
+
+        <button
+            class="icon-btn"
+            onclick="location.href='../dashboard.html'">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+        <div>
+
+            <h2>Business Reports</h2>
+
+            <p>Business Analytics & Financial Summary</p>
+
+        </div>
+
+    </header>
+
+    <!-- ===========================
+         SUMMARY CARDS
+    =========================== -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h4>Customers</h4>
+
+            <h2 id="customers">0</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-briefcase"></i>
+
+            <h4>Total Works</h4>
+
+            <h2 id="works">0</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-spinner"></i>
+
+            <h4>Active Works</h4>
+
+            <h2 id="activeWorks">0</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h4>Completed</h4>
+
+            <h2 id="completedWorks">0</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-ban"></i>
+
+            <h4>Cancelled</h4>
+
+            <h2 id="cancelledWorks">0</h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <h4>Outstanding</h4>
+
+            <h2 id="outstanding">₹0</h2>
+
+        </div>
+
+        <div class="summary-card income">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+            <h4>Today's Income</h4>
+
+            <h2 id="todayIncome">₹0</h2>
+
+        </div>
+
+        <div class="summary-card income">
+
+            <i class="fa-solid fa-arrow-trend-up"></i>
+
+            <h4>Monthly Income</h4>
+
+            <h2 id="monthlyIncome">₹0</h2>
+
+        </div>
+
+        <div class="summary-card expense">
+
+            <i class="fa-solid fa-arrow-trend-down"></i>
+
+            <h4>Monthly Expense</h4>
+
+            <h2 id="monthlyExpense">₹0</h2>
+
+        </div>
+
+        <div class="summary-card income">
+
+            <i class="fa-solid fa-sack-dollar"></i>
+
+            <h4>Total Income</h4>
+
+            <h2 id="income">₹0</h2>
+
+        </div>
+
+        <div class="summary-card expense">
+
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+
+            <h4>Total Expense</h4>
+
+            <h2 id="expense">₹0</h2>
+
+        </div>
+
+        <div class="summary-card profit">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <h4>Net Profit</h4>
+
+            <h2 id="profit">₹0</h2>
+
+        </div>
+
+    </div>
+
+    <!-- ===========================
+         CHART
+    =========================== -->
+
+    <div class="chart-card">
+
+        <h3>
+
+            Income vs Expense
+
+        </h3>
+
+        <canvas id="reportChart"></canvas>
+
+    </div>
+
+    <!-- ===========================
+         WORK STATUS
+    =========================== -->
+
+    <div class="chart-card">
+
+        <h3>
+
+            Work Status Summary
+
+        </h3>
+
+        <table class="status-table">
+
+            <tr>
+
+                <th>Status</th>
+
+                <th>Count</th>
+
+            </tr>
+
+            <tr>
+
+                <td>Draft</td>
+
+                <td id="draftWorks">0</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Order Confirmed</td>
+
+                <td id="confirmedWorks">0</td>
+
+            </tr>
+
+            <tr>
+
+                <td>In Progress</td>
+
+                <td id="progressWorks">0</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Finishing</td>
+
+                <td id="finishingWorks">0</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Ready</td>
+
+                <td id="readyWorks">0</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Delivered</td>
+
+                <td id="deliveredWorks">0</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Completed</td>
+
+                <td id="completedWorks">0</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Cancelled</td>
+
+                <td id="cancelledWorks">0</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- ===========================
+         DOWNLOAD
+    =========================== -->
+
+    <button
+        class="download-btn"
+        onclick="downloadReport()">
+
+        <i class="fa-solid fa-file-pdf"></i>
+
+        Download Business Report
+
+    </button>
+
+</div>
+
+<!-- ===========================
+     BOTTOM NAVIGATION
+=========================== -->
+
+<nav class="bottom-nav">
+
+    <div
+        class="nav-item"
+        onclick="location.href='../dashboard.html'">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Home</span>
+
+    </div>
+
+    <div
+        class="nav-item"
+        onclick="location.href='customers.html'">
+
+        <i class="fa-solid fa-users"></i>
+
+        <span>Customers</span>
+
+    </div>
+
+    <div
+        class="nav-item"
+        onclick="location.href='expense.html'">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <span>Expense</span>
+
+    </div>
+
+    <div class="nav-item active">
+
+        <i class="fa-solid fa-chart-column"></i>
+
+        <span>Reports</span>
+
+    </div>
+
+    <div
+        class="nav-item"
+        onclick="location.href='settings.html'">
+
+        <i class="fa-solid fa-gear"></i>
+
+        <span>More</span>
+
+    </div>
+
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script src="../assets/js/guard.js"></script>
+
+<script src="../assets/js/reports.js"></script>
+
+</body>
+
+</html>

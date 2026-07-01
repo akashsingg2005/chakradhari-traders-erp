@@ -1,0 +1,37 @@
+.flex{
+
+    display:flex;
+
+}
+
+.center{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.space-between{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.mt20{
+
+    margin-top:20px;
+
+}
+
+.mb20{
+
+    margin-bottom:20px;
+
+}

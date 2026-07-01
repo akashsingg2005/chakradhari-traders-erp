@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings</title>
+
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/settings.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="top-header">
+
+<button class="icon-btn"
+onclick="history.back()">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+</button>
+
+<div>
+
+<h2>Settings</h2>
+
+<p>Manage your account</p>
+
+</div>
+
+</header>
+
+<div class="container">
+
+    <!-- Profile Card -->
+
+    <div class="profile-card">
+
+        <div class="profile-avatar">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+        <div class="profile-info">
+
+    <h3 id="userName">
+
+        User
+
+    </h3>
+
+    <p id="businessName">
+
+        Business
+
+    </p>
+
+    <small id="businessType">
+
+        Business Type
+
+    </small>
+
+</div>
+
+    </div>
+
+    <!-- Settings Options -->
+
+    <div class="setting-card" onclick="editProfile()">
+
+        <i class="fa-solid fa-user-pen"></i>
+
+        <div>
+
+            <h3>Edit Profile</h3>
+
+            <p>Update your personal information</p>
+
+        </div>
+
+    </div>
+
+    <div class="setting-card" onclick="editBusiness()">
+
+        <i class="fa-solid fa-building"></i>
+
+        <div>
+
+            <h3>Business Details</h3>
+
+            <p>Edit your business information</p>
+
+        </div>
+
+    </div>
+
+    <div class="setting-card" onclick="changePassword()">
+
+        <i class="fa-solid fa-lock"></i>
+
+        <div>
+
+            <h3>Change Password</h3>
+
+            <p>Update your login password</p>
+
+        </div>
+
+    </div>
+
+    <div class="setting-card" onclick="showNotifications()">
+
+        <i class="fa-solid fa-bell"></i>
+
+        <div>
+
+            <h3>Notifications</h3>
+
+            <p>No new notifications</p>
+
+        </div>
+
+    </div>
+
+    <div class="setting-card" onclick="aboutApp()">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <div>
+
+            <h3>About ERP</h3>
+
+            <p>Version 1.0</p>
+
+        </div>
+
+    </div>
+
+    <div class="setting-card logout" onclick="logout()">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        <div>
+
+            <h3>Logout</h3>
+
+            <p>Sign out from your account</p>
+
+        </div>
+
+    </div>
+
+    <div class="version">
+
+    <h3>Chakradhari Traders ERP</h3>
+
+    <p>Version 1.0.0</p>
+
+    <p>
+
+        Developed by
+
+        <a
+        href="https://www.linkedin.com/in/akashsingh2005/"
+        target="_blank"
+        class="developer-link">
+
+            Akash Kumar Singh
+
+        </a>
+
+    </p>
+
+</div>
+
+</div>
+
+<!-- ===========================
+     BOTTOM NAVIGATION
+=========================== -->
+
+<nav class="bottom-nav">
+
+    <div
+        class="nav-item"
+        onclick="location.href='../dashboard.html'">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Home</span>
+
+    </div>
+
+    <div
+        class="nav-item"
+        onclick="location.href='customers.html'">
+
+        <i class="fa-solid fa-users"></i>
+
+        <span>Customers</span>
+
+    </div>
+
+    <div
+        class="nav-item"
+        onclick="location.href='expense.html'">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <span>Expense</span>
+
+    </div>
+
+    <div
+        class="nav-item"
+        onclick="location.href='reports.html'">
+
+        <i class="fa-solid fa-chart-column"></i>
+
+        <span>Reports</span>
+
+    </div>
+
+    <div class="nav-item active">
+
+        <i class="fa-solid fa-gear"></i>
+
+        <span>More</span>
+
+    </div>
+
+</nav>
+<div class="bottom-sheet" id="profileModal">
+
+<div class="sheet-content">
+
+<div class="sheet-header">
+
+<h2>Edit Profile</h2>
+
+<button onclick="closeProfile()">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<input
+id="editName"
+type="text"
+placeholder="Full Name">
+
+<input
+id="editEmail"
+type="email"
+placeholder="Email">
+
+<input
+id="editPhone"
+type="text"
+placeholder="Phone">
+
+<button
+class="save-btn"
+onclick="saveProfile()">
+
+Save Changes
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Business Modal -->
+
+<div class="bottom-sheet" id="businessModal">
+
+    <div class="sheet-content">
+
+        <div class="sheet-header">
+
+            <h2>Business Details</h2>
+
+            <button onclick="closeBusiness()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <input
+            type="text"
+            id="editBusinessName"
+            placeholder="Business Name">
+
+        <input
+            type="text"
+            id="editOwnerName"
+            placeholder="Owner Name">
+
+        <input
+            type="text"
+            id="editBusinessType"
+            placeholder="Business Type">
+
+        <input
+            type="email"
+            id="editBusinessEmail"
+            placeholder="Email">
+
+        <input
+            type="text"
+            id="editBusinessPhone"
+            placeholder="Mobile">
+
+        <input
+            type="text"
+            id="editGST"
+            placeholder="GST Number">
+
+        <textarea
+            id="editAddress"
+            placeholder="Address"></textarea>
+
+        <button
+            class="save-btn"
+            onclick="saveBusiness()">
+
+            Save Changes
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Change Password Modal -->
+
+<div class="bottom-sheet" id="passwordModal">
+
+    <div class="sheet-content">
+
+        <div class="sheet-header">
+
+            <h2>Change Password</h2>
+
+            <button onclick="closePassword()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div class="password-box">
+
+    <input
+        type="password"
+        id="currentPassword"
+        placeholder="Current Password">
+
+    <i
+        class="fa-solid fa-eye"
+        onclick="togglePassword('currentPassword', this)"></i>
+
+</div>
+
+<div class="password-box">
+
+    <input
+        type="password"
+        id="newPassword"
+        placeholder="New Password">
+
+    <i
+        class="fa-solid fa-eye"
+        onclick="togglePassword('newPassword', this)"></i>
+
+</div>
+
+<div class="password-box">
+
+    <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm New Password">
+
+    <i
+        class="fa-solid fa-eye"
+        onclick="togglePassword('confirmPassword', this)"></i>
+
+</div>
+
+        <button
+            class="save-btn"
+            onclick="savePassword()">
+
+            Update Password
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="bottom-sheet" id="notificationModal">
+
+    <div class="sheet-content">
+
+        <div class="sheet-header">
+
+            <h2>Notifications</h2>
+
+            <button onclick="closeNotification()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div style="text-align:center;padding:40px 10px;">
+
+            <i class="fa-solid fa-bell"
+               style="font-size:45px;color:#2563eb;"></i>
+
+            <h3 style="margin-top:20px;">
+                No Notifications
+            </h3>
+
+            <p style="color:#777;margin-top:10px;">
+                You're all caught up.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="bottom-sheet" id="logoutModal">
+
+    <div class="sheet-content">
+
+        <div class="sheet-header">
+
+            <h2>Logout</h2>
+
+        </div>
+
+        <p style="margin:20px 0">
+
+            Are you sure you want to logout?
+
+        </p>
+
+        <button class="save-btn" onclick="confirmLogout()">
+
+            Logout
+
+        </button>
+
+        <button class="cancel-btn" onclick="closeLogout()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="bottom-sheet" id="aboutModal">
+
+<div class="sheet-content">
+
+<div class="sheet-header">
+
+<h2>About ERP</h2>
+
+<button onclick="closeAbout()">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+<h3>Chakradhari Traders ERP</h3>
+
+<p>Version 1.0.0</p>
+
+<br>
+
+<p>
+
+Developed by
+
+<a
+
+href="https://www.linkedin.com/in/akashsingh2005/"
+
+target="_blank"
+
+class="developer-link">
+
+Akash Kumar Singh
+
+</a>
+
+</p>
+
+<br>
+
+<p>
+
+Made using HTML, CSS, JavaScript,
+
+Node.js,
+
+Express.js,
+
+MongoDB.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="overlay" id="overlay"></div>
+<script src="../assets/js/guard.js"></script>
+
+<script src="../assets/js/settings.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Ledger</title>
+
+    <link rel="stylesheet"
+          href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="../assets/css/ledger.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <button onclick="history.back()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+        <h2>
+
+            Ledger
+
+        </h2>
+
+    </div>
+
+    <!-- Summary -->
+
+    <div class="summary-card">
+
+        <div class="amount">
+
+            <h1 id="pendingAmount">
+
+                ₹0
+
+            </h1>
+
+            <p>
+
+                Outstanding Amount
+
+            </p>
+
+        </div>
+
+        <div class="summary-grid">
+
+            <div>
+
+                <small>
+
+                    Final Amount
+
+                </small>
+
+                <h3 id="finalAmount">
+
+                    ₹0
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <small>
+
+                    Received
+
+                </small>
+
+                <h3 id="receivedAmount">
+
+                    ₹0
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Transactions -->
+
+    <div class="section-title">
+
+        Transactions
+
+    </div>
+
+    <div id="paymentList">
+
+    </div>
+
+    <!-- Floating Button -->
+
+    <button
+        class="fab"
+        onclick="openPaymentModal()">
+
+        <i class="fa-solid fa-plus"></i>
+
+    </button>
+
+</div>
+
+<!-- Payment Modal -->
+
+<div
+class="modal"
+id="paymentModal">
+
+<div class="modal-content">
+
+<h2>
+
+Add Payment
+
+</h2>
+
+<label>
+
+Amount
+
+</label>
+
+<input
+id="paymentAmount"
+type="number">
+
+<label>
+
+Payment Method
+
+</label>
+
+<select id="paymentMethod">
+
+<option>
+
+Cash
+
+</option>
+
+<option>
+
+UPI
+
+</option>
+
+<option>
+
+Bank
+
+</option>
+
+</select>
+
+<label>
+
+Reference No.
+
+</label>
+
+<input
+id="referenceNo"
+type="text">
+
+<label>
+
+Notes
+
+</label>
+
+<textarea
+id="paymentNotes"></textarea>
+
+<div class="modal-buttons">
+
+<button
+onclick="savePayment()">
+
+Save
+
+</button>
+
+<button
+onclick="closePaymentModal()">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+<script src="assets/js/guard.js"></script>
+<script src="../assets/js/ledger.js"></script>
+
+</body>
+
+</html>

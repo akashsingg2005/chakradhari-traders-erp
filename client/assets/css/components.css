@@ -1,0 +1,75 @@
+.card{
+
+    background:var(--card);
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+    padding:20px;
+
+}
+
+.btn{
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.status{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:50px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.pending{
+
+    background:#FEF3C7;
+
+    color:#92400E;
+
+}
+
+.completed{
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+}
+
+.progress{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}

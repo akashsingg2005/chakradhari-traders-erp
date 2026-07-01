@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Expenses</title>
+
+    <link rel="stylesheet"
+        href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+        href="../assets/css/expense.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ===========================
+         HEADER
+    =========================== -->
+
+    <div class="header">
+
+        <button onclick="history.back()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+        <div>
+
+            <h2>Expenses</h2>
+
+            <p>
+
+                Manage Business Expenses
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ===========================
+         SUMMARY
+    =========================== -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+
+            <span>Total Expense</span>
+
+            <h2 id="totalExpense">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <span>This Month</span>
+
+            <h2 id="monthlyExpense">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- ===========================
+         SEARCH
+    =========================== -->
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+
+            type="text"
+
+            id="searchExpense"
+
+            placeholder="Search Expense"
+
+            onkeyup="searchExpense()">
+
+    </div>
+
+    <!-- ===========================
+         FILTER
+    =========================== -->
+
+    <select
+
+        id="categoryFilter"
+
+        onchange="filterExpense()">
+
+        <option value="All">
+
+            All Categories
+
+        </option>
+
+        <option value="Material">
+
+            Material
+
+        </option>
+
+        <option value="Transport">
+
+            Transport
+
+        </option>
+
+        <option value="Salary">
+
+            Salary
+
+        </option>
+
+        <option value="Electricity">
+
+            Electricity
+
+        </option>
+
+        <option value="Rent">
+
+            Rent
+
+        </option>
+
+        <option value="Food">
+
+            Food
+
+        </option>
+
+        <option value="Maintenance">
+
+            Maintenance
+
+        </option>
+
+        <option value="Other">
+
+            Other
+
+        </option>
+
+    </select>
+
+    <!-- ===========================
+         ADD BUTTON
+    =========================== -->
+
+    <button
+
+        class="add-btn"
+
+        onclick="openExpenseForm()">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add Expense
+
+    </button>
+
+    <!-- ===========================
+         MONTH WISE LIST
+    =========================== -->
+
+    <div id="expenseList">
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     ADD / EDIT EXPENSE
+=========================== -->
+
+<div class="bottom-sheet"
+
+    id="expenseModal">
+
+    <div class="sheet-content">
+
+    <div class="sheet-header">
+
+        <h2 id="expenseTitle">
+
+            Add Expense
+
+        </h2>
+
+        <button
+            class="close-btn"
+            onclick="closeExpenseForm()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+        <input
+
+            id="title"
+
+            placeholder="Expense Title">
+
+        <select id="category">
+
+            <option>Material</option>
+
+            <option>Transport</option>
+
+            <option>Salary</option>
+
+            <option>Electricity</option>
+
+            <option>Rent</option>
+
+            <option>Food</option>
+
+            <option>Maintenance</option>
+
+            <option>Other</option>
+
+        </select>
+
+        <input
+
+            id="amount"
+
+            type="number"
+
+            placeholder="Amount">
+
+        <select id="paymentMethod">
+
+            <option>Cash</option>
+
+            <option>UPI</option>
+
+            <option>Bank</option>
+
+        </select>
+
+        <textarea
+
+            id="notes"
+
+            placeholder="Notes"></textarea>
+
+        <button
+
+            class="save-btn"
+
+            id="expenseBtn"
+
+            onclick="saveExpense()">
+
+            Save Expense
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     BOTTOM NAVIGATION
+=========================== -->
+
+<nav class="bottom-nav">
+
+    <div
+
+        class="nav-item"
+
+        onclick="location.href='../dashboard.html'">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Home</span>
+
+    </div>
+
+    <div
+
+        class="nav-item"
+
+        onclick="location.href='customers.html'">
+
+        <i class="fa-solid fa-users"></i>
+
+        <span>Customers</span>
+
+    </div>
+
+    <div class="nav-item active">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <span>Expense</span>
+
+    </div>
+
+    <div
+
+        class="nav-item"
+
+        onclick="location.href='reports.html'">
+
+        <i class="fa-solid fa-chart-column"></i>
+
+        <span>Reports</span>
+
+    </div>
+
+    <div
+
+        class="nav-item"
+
+        onclick="location.href='settings.html'">
+
+        <i class="fa-solid fa-gear"></i>
+
+        <span>More</span>
+
+    </div>
+
+</nav>
+
+<script src="../assets/js/guard.js"></script>
+
+<script src="../assets/js/expense.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Chakradhari Traders ERP</title>
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="assets/css/style.css">
+
+    <link rel="stylesheet"
+        href="assets/css/login.css">
+
+</head>
+
+<body>
+
+<!-- Background Animation -->
+
+<div class="bg-gradient"></div>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<div class="login-container">
+
+    <!-- Left Side (Desktop Only) -->
+
+    <div class="left-panel">
+
+        <div class="hero-content">
+
+            <div class="hero-logo">
+
+                CT
+
+            </div>
+
+            <h1>
+
+                Chakradhari
+                <br>
+                Traders ERP
+
+            </h1>
+
+            <p>
+
+                Manage your customers, work,
+                payments, expenses and reports
+                from one powerful dashboard.
+
+            </p>
+
+            <div class="feature-list">
+
+                <div>
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Customer Management
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                    Work Tracking
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    Expense Manager
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Payment Tracking
+
+                </div>
+
+                <div>
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    Reports & Analytics
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Right Side -->
+
+    <div class="right-panel">
+
+        <div class="login-card">
+
+            <div class="mobile-logo">
+
+                <div class="logo-circle">
+
+                    CT
+
+                </div>
+
+            </div>
+
+            <h2>
+
+                Welcome Back 👋
+
+            </h2>
+
+            <p class="subtitle">
+
+                Sign in to continue
+
+            </p>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+
+                    <label>
+
+                        Email Address
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="username"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>
+
+                        Password
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter password"
+                            required>
+
+                        <i
+                            class="fa-solid fa-eye toggle-password"
+                            id="togglePassword">
+
+                        </i>
+
+                    </div>
+                    <small id="loginError" class="login-error"></small>
+
+                </div>
+
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input type="checkbox">
+
+                        Remember Me
+
+                    </label>
+
+                    <a href="#"
+                        onclick="alert('Coming Soon')">
+
+                        Forgot Password?
+
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="loginBtn">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Login
+
+                </button>
+
+            </form>
+
+            <div class="divider">
+
+                <span>
+
+                    ERP v1.0.0
+
+                </span>
+
+            </div>
+
+            <div class="footer">
+
+                Developed with ❤️ by
+
+                <a
+                    href="https://www.linkedin.com/in/akashsingh2005/"
+                    target="_blank">
+
+                    Akash Kumar Singh
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="assets/js/auth.js"></script>
+
+<script>
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+
+        document.getElementById("loginForm").requestSubmit();
+
+    }
+
+});    
+
+const toggle=document.getElementById("togglePassword");
+
+const password=document.getElementById("password");
+
+toggle.onclick=function(){
+
+if(password.type==="password"){
+
+password.type="text";
+
+toggle.className="fa-solid fa-eye-slash toggle-password";
+
+}
+
+else{
+
+password.type="password";
+
+toggle.className="fa-solid fa-eye toggle-password";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

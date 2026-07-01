@@ -1,0 +1,904 @@
+/* ===========================
+   GLOBAL
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#222;
+}
+
+.container{
+    width:min(100%,600px);
+    margin:auto;
+    padding:15px;
+    padding-bottom:110px;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.app-header{
+
+    position:sticky;
+    top:0;
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 16px;
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    color:#fff;
+
+    z-index:100;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+}
+
+.header-title{
+
+    flex:1;
+
+    text-align:center;
+
+}
+
+.header-title h2{
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.header-title small{
+
+    display:block;
+
+    margin-top:2px;
+
+    opacity:.9;
+
+    font-size:12px;
+
+}
+
+.icon-btn{
+
+    width:44px;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.15);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:18px;
+
+}
+
+.icon-btn:hover{
+
+    background:rgba(255,255,255,.25);
+
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+
+.search-box{
+
+    margin-top:20px;
+
+    height:58px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.search-box i{
+
+    color:#2563eb;
+
+    font-size:18px;
+
+}
+
+.search-box input{
+
+    flex:1;
+
+    margin-left:12px;
+
+    border:none;
+
+    outline:none;
+
+    font-size:15px;
+
+    background:transparent;
+
+}
+
+/* ===========================
+   STATS
+=========================== */
+
+.stats{
+
+    margin:20px 0;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:14px;
+
+}
+
+.stat-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.stat-card h2{
+
+    color:#2563eb;
+
+    font-size:24px;
+
+    margin-bottom:6px;
+
+}
+
+.stat-card p{
+
+    color:#666;
+
+    font-size:13px;
+
+}
+/* ===========================
+   CUSTOMER CARD
+=========================== */
+
+.customer-card{
+    background:#fff;
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    overflow:hidden;
+}
+
+.customer-card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.customer-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    width:100%;
+
+}
+
+.avatar{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.customer-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.customer-info h3{
+
+    font-size:18px;
+
+    margin-bottom:4px;
+
+}
+
+.customer-info small{
+
+    color:#666;
+
+    font-size:13px;
+
+}
+
+.customer-info small i{
+
+    color:#2563eb;
+
+    margin-right:5px;
+
+}
+
+.menu-btn{
+
+    width:42px;
+
+    height:42px;
+
+    flex-shrink:0;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#eef4ff;
+
+    color:#2563eb;
+
+    cursor:pointer;
+
+}
+
+
+.menu-btn:hover{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+/* ===========================
+   BALANCE BOX
+=========================== */
+
+.customer-summary{
+    margin:18px 0;
+    background:#f8fafc;
+    border-radius:16px;
+    padding:16px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.customer-summary div{
+
+    text-align:center;
+
+}
+
+.customer-summary small{
+
+    display:block;
+
+    color:#777;
+
+    margin-bottom:6px;
+
+    font-size:12px;
+
+}
+
+.customer-summary h3{
+
+    color:#2563eb;
+
+    font-size:22px;
+
+}
+
+.status{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.pending{
+
+    background:#FEF3C7;
+
+    color:#92400E;
+
+}
+
+.advance{
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+}
+
+/* ===========================
+   ACTION BUTTONS
+=========================== */
+
+.customer-actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+
+.customer-actions button{
+
+    height:48px;
+
+    width:100%;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.25s;
+
+}
+
+.customer-actions button:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* ===========================
+   EMPTY CARD
+=========================== */
+
+.customer-card.empty{
+
+    text-align:center;
+
+    padding:45px 20px;
+
+}
+
+.customer-card.empty i{
+
+    font-size:55px;
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+.customer-card.empty h3{
+
+    margin-bottom:8px;
+
+}
+
+.customer-card.empty p{
+
+    color:#666;
+
+}
+
+/* ===========================
+   FLOATING BUTTON
+=========================== */
+
+.fab{
+
+    position:fixed;
+
+    right:22px;
+
+    bottom:115px;
+
+    width:64px;
+
+    height:64px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 25px rgba(37,99,235,.35);
+
+    transition:.25s;
+
+}
+
+.fab:hover{
+
+    transform:scale(1.08);
+
+}
+/* ===========================
+   BOTTOM SHEET
+=========================== */
+
+.bottom-sheet{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:-110%;
+
+    background:#fff;
+
+    border-radius:28px 28px 0 0;
+
+    box-shadow:0 -10px 30px rgba(0,0,0,.15);
+
+    transition:.35s ease;
+
+    z-index:9999;
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+}
+
+.bottom-sheet.show{
+
+    bottom:0;
+
+}
+
+.sheet-content{
+
+    padding:24px;
+
+    padding-bottom:100px;
+
+}
+
+.sheet-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.sheet-header h2{
+
+    font-size:22px;
+
+    color:#222;
+
+}
+
+.sheet-header button{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#EEF4FF;
+
+    color:#2563eb;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+}
+
+.sheet-content input,
+.sheet-content textarea,
+.sheet-content select{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    margin-bottom:14px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.sheet-content input:focus,
+.sheet-content textarea:focus,
+.sheet-content select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+
+}
+
+.sheet-content textarea{
+
+    resize:none;
+
+    min-height:90px;
+
+}
+
+.save-btn{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+.save-btn i{
+
+    margin-right:8px;
+
+}
+
+/* ===========================
+   ACTION BUTTONS
+=========================== */
+
+.action-btn{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:16px;
+
+    margin-bottom:12px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#F8FAFC;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.action-btn:hover{
+
+    background:#EEF4FF;
+
+}
+
+.action-btn i{
+
+    width:24px;
+
+    color:#2563eb;
+
+    text-align:center;
+
+}
+
+.action-btn.danger{
+
+    color:#dc2626;
+
+}
+
+.action-btn.danger i{
+
+    color:#dc2626;
+
+}
+
+/* ===========================
+   COMMON BOTTOM NAVIGATION
+=========================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:15px;
+
+    right:15px;
+
+    bottom:15px;
+
+    height:72px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    z-index:999;
+
+}
+
+.nav-item{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:4px;
+
+    color:#777;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.nav-item i{
+
+    font-size:20px;
+
+    transition:.3s;
+
+}
+
+.nav-item span{
+
+    font-size:12px;
+
+    font-weight:500;
+
+}
+
+.nav-item.active{
+
+    color:#2563eb;
+
+    transform:translateY(-6px);
+
+}
+
+.nav-item.active i{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 8px 20px rgba(37,99,235,.35);
+
+}
+
+.container{
+
+    padding-bottom:110px;
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:10px;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+    .customer-summary{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .customer-actions{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .customer-card{
+
+        padding:15px;
+
+    }
+
+    .customer-actions{
+
+        gap:8px;
+
+    }
+
+    .customer-actions button{
+
+        height:44px;
+
+        font-size:16px;
+
+    }
+
+}

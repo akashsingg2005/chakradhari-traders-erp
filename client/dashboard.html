@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chakradhari Traders ERP</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/sidebar.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ==========================
+         TOP HEADER
+    =========================== -->
+
+    <header class="top-header">
+
+        <div class="left">
+
+            <button
+class="icon-btn"
+onclick="openSidebar()">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+        </div>
+
+        <div class="center">
+
+    <h2 id="greeting">
+
+        Good Morning ☀️
+
+    </h2>
+
+    <p>
+
+        Welcome Back,
+
+        <span id="ownerName">
+
+            Loading...
+
+        </span>
+
+    </p>
+
+</div>
+
+        <div class="right">
+
+            <button class="icon-btn" onclick="openNotification()">
+
+    <i class="fa-solid fa-bell"></i>
+
+    <span
+        id="notificationDot"
+        class="notification-dot">
+    </span>
+
+</button>
+
+            <button class="icon-btn logout-btn"
+
+                onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- ==========================
+         BUSINESS CARD
+    =========================== -->
+
+    <section class="business-card"
+
+        onclick="openBusinessSheet()">
+
+        <div>
+
+            <small>Current Business</small>
+
+            <h2 id="businessName">
+
+                Loading...
+
+            </h2>
+
+            <span id="businessType">
+
+                Business Type
+
+            </span>
+
+        </div>
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </section>
+
+    <button class="add-business-btn"
+
+        onclick="openBusinessForm()">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add New Business
+
+    </button>
+
+    <!-- ==========================
+         SUMMARY
+    =========================== -->
+
+    <section class="summary-grid">
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <h4>Outstanding</h4>
+
+            <h2 id="outstanding">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-sack-dollar"></i>
+
+            <h4>Today's Income</h4>
+
+            <h2 id="todayIncome">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+        <div class="summary-card">
+
+    <i class="fa-solid fa-chart-line"></i>
+
+    <h4>Monthly Income</h4>
+
+    <h2 id="monthlyIncome">₹0</h2>
+
+</div>
+
+<div class="summary-card">
+
+    <i class="fa-solid fa-money-bill-wave"></i>
+
+    <h4>Monthly Expense</h4>
+
+    <h2 id="monthlyExpense">₹0</h2>
+
+</div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h4>Customers</h4>
+
+            <h2 id="customerCount">
+
+                0
+
+            </h2>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fa-solid fa-briefcase"></i>
+
+            <h4>Active Works</h4>
+
+            <h2 id="workCount">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </section>
+
+    <br>
+
+    <div class="summary-card" id="profitCard">
+
+    <i class="fa-solid fa-chart-line"></i>
+
+    <h4>Profit / Loss</h4>
+
+    <h2 id="profitAmount">
+
+        ₹0
+
+    </h2>
+
+</div>
+
+<br>
+
+    <!-- ==========================
+         QUICK ACTIONS
+    =========================== -->
+
+    <section class="quick-actions">
+
+    <div class="action-card"
+        onclick="location.href='pages/customers.html'">
+
+        <i class="fa-solid fa-users"></i>
+
+        <span>Customers</span>
+
+    </div>
+
+    <div class="action-card"
+        onclick="location.href='pages/customers.html'">
+
+        <i class="fa-solid fa-briefcase"></i>
+
+        <span>New Work</span>
+
+    </div>
+
+    <div class="action-card"
+        onclick="location.href='pages/customers.html'">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <span>Payment</span>
+
+    </div>
+
+    <div class="action-card"
+        onclick="location.href='pages/customers.html'">
+
+        <i class="fa-solid fa-file-invoice"></i>
+
+        <span>Invoice</span>
+
+    </div>
+
+    <div class="action-card"
+        onclick="location.href='pages/expense.html'">
+
+        <i class="fa-solid fa-money-bill"></i>
+
+        <span>Expense</span>
+
+    </div>
+
+    <div class="action-card"
+        onclick="location.href='pages/reports.html'">
+
+        <i class="fa-solid fa-chart-column"></i>
+
+        <span>Reports</span>
+
+    </div>
+
+</section>
+
+    <!-- ==========================
+         MONTHLY REVENUE
+    =========================== -->
+
+    <div class="section-header">
+
+        <h3>Monthly Revenue</h3>
+
+    </div>
+
+    <section class="chart-card">
+
+        <canvas id="revenueChart"></canvas>
+
+    </section>
+
+    <!-- ==========================
+         RECENT PAYMENTS
+    =========================== -->
+
+    <div class="section-header">
+
+    <h3>Recent Payments</h3>
+
+    <span onclick="viewAllPayments()">
+
+        View All >
+
+    </span>
+
+</div>
+
+    <section id="recentPayments">
+
+        <div class="empty-card">
+
+            No Payments Yet
+
+        </div>
+
+    </section>
+
+    <!-- ==========================
+         PENDING WORKS
+    =========================== -->
+
+    <div class="section-header">
+
+        <h3>Pending Works</h3>
+
+        <span onclick="location.href='pages/customers.html'">
+
+            View All
+
+        </span>
+
+    </div>
+
+    <section id="pendingWorks">
+
+        <div class="empty-card">
+
+            No Pending Work
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ==========================
+     BUSINESS SWITCHER
+========================== -->
+
+<div class="bottom-sheet" id="businessSheet">
+
+    <div class="sheet-header">
+
+        <h2>
+
+            Business Management
+
+        </h2>
+
+        <button onclick="closeBusinessSheet()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+    <div id="businessList">
+
+    </div>
+
+    <button class="sheet-btn"
+
+        onclick="openBusinessForm()">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add New Business
+
+    </button>
+
+    <button class="sheet-btn"
+
+        onclick="editBusiness()">
+
+        <i class="fa-solid fa-pen"></i>
+
+        Edit Business
+
+    </button>
+
+    <button
+
+        class="sheet-btn delete"
+
+        onclick="deleteBusiness()">
+
+        <i class="fa-solid fa-trash"></i>
+
+        Delete Business
+
+    </button>
+
+</div>
+
+<!-- ==========================
+     ADD / EDIT BUSINESS
+========================== -->
+
+<div class="bottom-sheet" id="businessForm">
+
+    <div class="sheet-header">
+
+        <h2 id="businessFormTitle">
+
+            Add Business
+
+        </h2>
+
+        <button onclick="closeBusinessForm()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+    <div class="sheet-body">
+
+        <input
+
+            id="businessNameInput"
+
+            type="text"
+
+            placeholder="Business Name">
+
+        <input
+
+            id="ownerNameInput"
+
+            type="text"
+
+            placeholder="Owner Name">
+
+        <select id="businessTypeInput">
+
+            <option>
+
+                Printing & Advertising
+
+            </option>
+
+            <option>
+
+                Fabrication
+
+            </option>
+
+            <option>
+
+                Electronics
+
+            </option>
+
+            <option>
+
+                Retail Shop
+
+            </option>
+
+            <option>
+
+                Service
+
+            </option>
+
+            <option>
+
+                Other
+
+            </option>
+
+        </select>
+
+        <input
+
+            id="mobileInput"
+
+            type="text"
+
+            placeholder="Mobile">
+
+        <input
+
+            id="emailInput"
+
+            type="email"
+
+            placeholder="Email">
+
+        <input
+
+            id="gstInput"
+
+            type="text"
+
+            placeholder="GST Number">
+
+        <textarea
+
+            id="addressInput"
+
+            placeholder="Business Address">
+
+        </textarea>
+
+        <button
+
+            class="primary-btn"
+
+            onclick="saveBusiness()">
+
+            Save Business
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     DELETE BUSINESS
+========================== -->
+
+<div class="bottom-sheet"
+
+    id="deleteBusinessSheet">
+
+    <div class="sheet-header">
+
+        <h2>
+
+            Delete Business
+
+        </h2>
+
+        <button
+
+            onclick="closeDeleteSheet()">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+    <div class="sheet-body">
+
+        <p>
+
+            This will permanently delete:
+
+        </p>
+
+        <ul>
+
+            <li>Customers</li>
+
+            <li>Works</li>
+
+            <li>Payments</li>
+
+            <li>Expenses</li>
+
+            <li>Reports</li>
+
+        </ul>
+
+        <p>
+
+            This action cannot be undone.
+
+        </p>
+
+        <button
+
+            class="danger-btn"
+
+            onclick="confirmDeleteBusiness()">
+
+            Delete Business
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     BOTTOM NAVIGATION
+========================== -->
+
+<nav class="bottom-nav">
+
+    <div class="nav-item active"
+        onclick="location.href='dashboard.html'">
+
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+
+    </div>
+
+    <div class="nav-item"
+        onclick="location.href='pages/customers.html'">
+
+        <i class="fa-solid fa-users"></i>
+        <span>Customers</span>
+
+    </div>
+
+    <div class="nav-item"
+        onclick="location.href='pages/expense.html'">
+
+        <i class="fa-solid fa-wallet"></i>
+        <span>Expense</span>
+
+    </div>
+
+    <div class="nav-item"
+        onclick="location.href='pages/reports.html'">
+
+        <i class="fa-solid fa-chart-column"></i>
+        <span>Reports</span>
+
+    </div>
+
+    <div class="nav-item"
+        onclick="location.href='pages/settings.html'">
+
+        <i class="fa-solid fa-gear"></i>
+        <span>More</span>
+
+    </div>
+
+</nav>
+
+<!-- Overlay -->
+
+<div
+class="sidebar-overlay"
+id="sidebarOverlay"
+onclick="closeSidebar()">
+
+</div>
+
+<!-- Sidebar -->
+
+<div
+class="sidebar"
+id="sidebar">
+
+<div class="sidebar-header">
+
+<div class="profile">
+
+<div class="avatar">
+
+<i class="fa-solid fa-user"></i>
+
+</div>
+
+<div>
+
+<h3 id="sideOwner">
+
+User
+
+</h3>
+
+<p id="sideBusiness">
+
+Business
+
+</p>
+
+<small id="sideBusinessType">
+
+Business Type
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="sidebar-menu">
+
+<div class="menu-item active"
+onclick="closeSidebar()">
+
+<i class="fa-solid fa-house"></i>
+
+Dashboard
+
+</div>
+
+<div class="menu-item"
+onclick="location.href='pages/customers.html'">
+
+<i class="fa-solid fa-users"></i>
+
+Customers
+
+</div>
+
+<div class="menu-item"
+onclick="location.href='pages/expense.html'">
+
+<i class="fa-solid fa-wallet"></i>
+
+Expenses
+
+</div>
+
+<div class="menu-item"
+onclick="location.href='pages/reports.html'">
+
+<i class="fa-solid fa-chart-column"></i>
+
+Reports
+
+</div>
+
+<div class="menu-item"
+onclick="location.href='pages/settings.html'">
+
+<i class="fa-solid fa-gear"></i>
+
+Settings
+
+</div>
+
+<hr>
+
+<div class="menu-item logout"
+onclick="logout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</div>
+
+</div>
+
+</div>
+
+<div class="bottom-sheet notification-sheet" id="notificationModal">
+
+    <div class="sheet-content">
+
+        <div class="sheet-header">
+
+            <h2>Notifications</h2>
+
+            <button class="close-btn" onclick="closeNotification()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+        <div style="display:flex;justify-content:flex-end;padding:10px 20px;">
+
+    <button class="clear-btn" onclick="clearNotifications()">
+
+        Clear All
+
+    </button>
+
+</div>
+
+        <div id="notificationList">
+
+    <div class="notification-card">
+
+        <div class="notify-icon success">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+        </div>
+
+        <div>
+
+            <h4>System Ready</h4>
+
+            <p>Your ERP is running successfully.</p>
+
+            <small>Just now</small>
+
+        </div>
+
+    </div>
+
+    <div class="notification-card">
+
+        <div class="notify-icon primary">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+        </div>
+
+        <div>
+
+            <h4>Welcome</h4>
+
+            <p>Welcome to Chakradhari Traders ERP.</p>
+
+            <small>Today</small>
+
+        </div>
+
+    </div>
+
+</div>
+
+    </div>
+
+</div>
+
+
+<div id="overlay" class="overlay" onclick="closeNotification()"></div>
+
+
+<script src="assets/js/sidebar.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="assets/js/guard.js"></script>
+
+<script src="assets/js/dashboard.js"></script>
+
+
+</body>
+
+</html>

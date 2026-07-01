@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Work</title>
+
+    <link rel="stylesheet"
+          href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="../assets/css/add-work.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <button onclick="history.back()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+        <h2>Add Work</h2>
+
+    </div>
+
+
+<!-- =========================
+     BASIC INFORMATION
+========================== -->
+
+<div class="card">
+
+    <div class="card-title">
+
+        <i class="fa-solid fa-briefcase"></i>
+
+        <span>Basic Information</span>
+
+    </div>
+
+    <label class="field-label">
+
+        Work Name <span>*</span>
+
+    </label>
+
+    <input
+        id="workName"
+        type="text"
+        placeholder="e.g. Main Gate Fabrication">
+
+    <label class="field-label">
+
+        Work Type <span>*</span>
+
+    </label>
+
+    <select id="workType">
+
+        <option value="">Select Work Type</option>
+
+        <option>Fabrication</option>
+
+        <option>Repair</option>
+
+        <option>Installation</option>
+
+        <option>Maintenance</option>
+
+        <option>Printing</option>
+
+        <option>Cyber Service</option>
+
+        <option>Tailoring</option>
+
+        <option>Grocery Sale</option>
+
+        <option>General</option>
+
+    </select>
+
+    <label class="field-label">
+
+        Customer Reference
+
+    </label>
+
+    <input
+        id="customerReference"
+        type="text"
+        placeholder="Optional (House No., Shop Name, etc.)">
+
+    <label class="field-label">
+
+        Description
+
+    </label>
+
+    <textarea
+        id="description"
+        placeholder="Write complete work description..."></textarea>
+
+</div>
+
+<!-- =========================
+     WORK ITEMS
+========================== -->
+
+<div class="card">
+
+    <div class="title-row">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-boxes-stacked"></i>
+
+            <span>Work Items</span>
+
+        </div>
+
+        <button
+            type="button"
+            class="add-item-btn"
+            onclick="addItem()">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Item
+
+        </button>
+
+    </div>
+
+    <p class="section-note">
+
+        Add all materials/items used in this work.
+
+    </p>
+
+    <div id="itemContainer">
+
+    </div>
+
+</div>
+
+<!-- =========================
+     LABOUR CHARGES
+========================== -->
+
+<div class="card">
+
+    <div class="card-title">
+
+        <i class="fa-solid fa-user-hard-hat"></i>
+
+        <span>Labour Charges (Optional)</span>
+
+    </div>
+
+    <label class="field-label">
+
+        Labour Charge (₹)
+
+    </label>
+
+    <input
+        id="labourCharge"
+        type="number"
+        value="0"
+        placeholder="Enter Labour Charge">
+
+    <label class="field-label">
+
+        Labour Description
+
+    </label>
+
+    <textarea
+        id="labourNote"
+        placeholder="e.g. Welding Charges, Fitting Charges"></textarea>
+
+</div>
+
+<!-- =========================
+     EXTRA CHARGES
+========================== -->
+
+<div class="card">
+
+    <div class="card-title">
+
+        <i class="fa-solid fa-truck"></i>
+
+        <span>Extra Charges (Optional)</span>
+
+    </div>
+
+    <div class="grid-2">
+
+        <div>
+
+            <label class="field-label">
+
+                Transport
+
+            </label>
+
+            <input
+                id="transportCharge"
+                type="number"
+                value="0">
+
+        </div>
+
+        <div>
+
+            <label class="field-label">
+
+                Installation
+
+            </label>
+
+            <input
+                id="installationCharge"
+                type="number"
+                value="0">
+
+        </div>
+
+    </div>
+
+    <label class="field-label">
+
+        Other Charges
+
+    </label>
+
+    <input
+        id="otherCharge"
+        type="number"
+        value="0">
+
+</div>
+
+<!-- =========================
+     PRICING
+========================== -->
+
+<div class="card">
+
+    <div class="card-title">
+
+        <i class="fa-solid fa-wallet"></i>
+
+        <span>Pricing Summary</span>
+
+    </div>
+
+    <div class="summary-row">
+
+        <span>Material Total</span>
+
+        <strong id="materialTotal">
+
+            ₹0
+
+        </strong>
+
+    </div>
+
+    <div class="summary-row">
+
+        <span>Labour Charges</span>
+
+        <strong id="labourTotal">
+
+            ₹0
+
+        </strong>
+
+    </div>
+
+    <div class="summary-row">
+
+        <span>Extra Charges</span>
+
+        <strong id="extraTotal">
+
+            ₹0
+
+        </strong>
+
+    </div>
+
+    <hr>
+
+    <div class="summary-row">
+
+        <span>Subtotal</span>
+
+        <strong id="subtotal">
+
+            ₹0
+
+        </strong>
+
+    </div>
+
+    <label class="field-label">
+
+        Discount Type
+
+    </label>
+
+    <select id="discountType">
+
+        <option value="Fixed">
+
+            Fixed (₹)
+
+        </option>
+
+        <option value="Percentage">
+
+            Percentage (%)
+
+        </option>
+
+    </select>
+
+    <label class="field-label">
+
+        Discount Value
+
+    </label>
+
+    <input
+        id="discountValue"
+        type="number"
+        value="0">
+
+    <hr>
+
+    <div class="summary-row total">
+
+        <span>Final Amount</span>
+
+        <strong id="finalAmount">
+
+            ₹0
+
+        </strong>
+
+    </div>
+
+</div>
+
+
+
+<!-- Work Details -->
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            <span>Work Details</span>
+
+        </div>
+
+        <label class="field-label">
+
+            Priority
+
+        </label>
+
+        <select id="priority">
+
+            <option value="Low">
+
+                🟢 Low
+
+            </option>
+
+            <option value="Medium" selected>
+
+                🟡 Medium
+
+            </option>
+
+            <option value="High">
+
+                🔴 High
+
+            </option>
+
+        </select>
+
+        <label class="field-label">
+
+            Expected Delivery Date
+
+        </label>
+
+        <input
+            id="deliveryDate"
+            type="date">
+
+        <label class="field-label">
+
+            Additional Notes
+
+        </label>
+
+        <textarea
+            id="notes"
+            placeholder="Write any special instructions..."></textarea>
+
+    </div>
+
+    <!-- Save -->
+
+    <button
+        class="save-btn"
+        onclick="saveWork()">
+
+        <i class="fa-solid fa-floppy-disk"></i>
+
+        Save Work
+
+    </button>
+
+</div>
+<script src="assets/js/guard.js"></script>
+<script src="../assets/js/add-work.js"></script>
+
+</body>
+
+</html>

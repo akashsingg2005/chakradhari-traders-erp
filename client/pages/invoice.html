@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Invoice</title>
+
+    <link rel="stylesheet"
+          href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="../assets/css/invoice.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="invoice-container" id="invoice">
+
+    <div class="invoice-header">
+
+        <h1 id="businessName">
+
+            Business Name
+
+        </h1>
+
+        <p id="businessAddress"></p>
+
+        <p id="businessMobile"></p>
+
+    </div>
+
+    <div class="invoice-info">
+
+        <div>
+
+            <strong>Invoice No</strong>
+
+            <p id="invoiceNumber"></p>
+
+        </div>
+
+        <div>
+
+            <strong>Date</strong>
+
+            <p id="invoiceDate"></p>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="customer-box">
+
+        <h3>Bill To</h3>
+
+        <p id="customerName"></p>
+
+        <p id="customerMobile"></p>
+
+        <p id="customerAddress"></p>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Item</th>
+
+                <th>Qty</th>
+
+                <th>Rate</th>
+
+                <th>Amount</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="itemTable">
+
+        </tbody>
+
+    </table>
+
+    <div class="total-box">
+
+        <div>
+
+            <span>Subtotal</span>
+
+            <span id="subtotal"></span>
+
+        </div>
+
+        <div>
+
+            <span>Labour</span>
+
+            <span id="labour"></span>
+
+        </div>
+
+        <div>
+
+            <span>Transport</span>
+
+            <span id="transport"></span>
+
+        </div>
+
+        <div>
+
+            <span>Installation</span>
+
+            <span id="installation"></span>
+
+        </div>
+
+        <div>
+
+            <span>Other</span>
+
+            <span id="other"></span>
+
+        </div>
+
+        <div>
+
+            <span>Discount</span>
+
+            <span id="discount"></span>
+
+        </div>
+
+        <hr>
+
+        <div class="grand-total">
+
+            <span>Total</span>
+
+            <span id="grandTotal"></span>
+
+        </div>
+
+        <div>
+
+            <span>Received</span>
+
+            <span id="received"></span>
+
+        </div>
+
+        <div>
+
+            <span>Pending</span>
+
+            <span id="pending"></span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="buttons">
+
+    <button onclick="window.print()">
+
+        🖨 Print Invoice
+
+    </button>
+
+    <button id="downloadBtn">
+
+        ⬇ Download PDF
+
+    </button>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script src="../assets/js/invoice.js"></script>
+
+</body>
+
+</html>

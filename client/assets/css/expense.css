@@ -1,0 +1,782 @@
+/* ======================================
+   GLOBAL
+====================================== */
+
+body{
+
+    margin:0;
+
+    background:#f5f7fb;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.container{
+
+    padding:20px;
+
+    padding-bottom:110px;
+
+}
+
+/* ======================================
+   HEADER
+====================================== */
+
+.header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.header button{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+
+.header h2{
+
+    margin:0;
+
+}
+
+.header p{
+
+    margin-top:4px;
+
+    color:#777;
+
+    font-size:13px;
+
+}
+
+/* ======================================
+   SUMMARY
+====================================== */
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.summary-card{
+
+    background:linear-gradient(135deg,#2563eb,#4f7fff);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    color:#fff;
+
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+
+}
+
+.summary-card span{
+
+    font-size:14px;
+
+    opacity:.9;
+
+}
+
+.summary-card h2{
+
+    margin-top:10px;
+
+    font-size:28px;
+
+}
+
+/* ======================================
+   SEARCH
+====================================== */
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    background:#fff;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+
+    margin-bottom:15px;
+
+}
+
+.search-box i{
+
+    color:#888;
+
+}
+
+.search-box input{
+
+    border:none;
+
+    outline:none;
+
+    margin-left:10px;
+
+    width:100%;
+
+    font-size:15px;
+
+}
+
+/* ======================================
+   FILTER
+====================================== */
+
+#categoryFilter{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    border:1px solid #ddd;
+
+    margin-bottom:18px;
+
+    background:#fff;
+
+}
+
+/* ======================================
+   ADD BUTTON
+====================================== */
+
+.add-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    margin-bottom:20px;
+
+}
+
+.add-btn i{
+
+    margin-right:8px;
+
+}
+
+/* ======================================
+   MONTH CARD
+====================================== */
+
+.month-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    margin-bottom:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.month-card:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.month-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.month-header:hover{
+
+    background:#f8fafc;
+
+}
+
+.month-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.month-left i{
+
+    color:#2563eb;
+
+    transition:.35s;
+
+    font-size:15px;
+
+}
+
+.month-total{
+
+    color:#dc2626;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+
+/* ======================================
+   EXPENSE LIST
+====================================== */
+
+.month-body{
+
+    max-height:0;
+
+    overflow:hidden;
+
+    transition:max-height .4s ease;
+
+    padding:0 18px;
+
+}
+
+.month-body.show{
+
+    max-height:3000px;
+
+    padding:0 18px 18px;
+
+}
+
+.expense-card{
+
+    background:#f8fafc;
+
+    border-radius:14px;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border-left:5px solid #2563eb;
+
+}
+
+.expense-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.expense-title{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    color:#222;
+
+}
+
+.expense-amount{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#dc2626;
+
+}
+
+.expense-details{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:8px;
+
+}
+
+.badge{
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:#fff;
+
+}
+
+.material{
+
+    background:#22c55e;
+
+}
+
+.salary{
+
+    background:#2563eb;
+
+}
+
+.transport{
+
+    background:#f59e0b;
+
+}
+
+.electricity{
+
+    background:#8b5cf6;
+
+}
+
+.rent{
+
+    background:#ef4444;
+
+}
+
+.food{
+
+    background:#ec4899;
+
+}
+
+.maintenance{
+
+    background:#0ea5e9;
+
+}
+
+.other{
+
+    background:#6b7280;
+
+}
+
+.expense-date{
+
+    color:#777;
+
+    margin-top:10px;
+
+    font-size:13px;
+
+}
+
+.notes{
+
+    margin-top:8px;
+
+    color:#555;
+
+    font-size:14px;
+
+}
+
+/* ======================================
+   ACTION BUTTONS
+====================================== */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+.edit-btn{
+
+    flex:1;
+
+    padding:11px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+}
+
+.delete-btn{
+
+    flex:1;
+
+    padding:11px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+}
+
+.edit-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+}
+
+/* ======================================
+   BOTTOM SHEET
+====================================== */
+
+.bottom-sheet{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:-100%;
+
+    background:#fff;
+
+    border-radius:25px 25px 0 0;
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+.bottom-sheet.show{
+
+    bottom:0;
+
+}
+
+.sheet-content{
+
+    padding:25px;
+
+}
+
+.sheet-content input,
+.sheet-content textarea,
+.sheet-content select{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+.sheet-content textarea{
+
+    min-height:90px;
+
+    resize:none;
+
+}
+
+.save-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+/* ======================================
+   BOTTOM NAVIGATION
+====================================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:15px;
+
+    right:15px;
+
+    bottom:15px;
+
+    height:72px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    z-index:999;
+
+}
+
+.nav-item{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:4px;
+
+    color:#777;
+
+    cursor:pointer;
+
+}
+
+.nav-item i{
+
+    font-size:20px;
+
+}
+
+.nav-item span{
+
+    font-size:12px;
+
+}
+
+.nav-item.active{
+
+    color:#2563eb;
+
+    transform:translateY(-6px);
+
+}
+
+.nav-item.active i{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media(max-width:768px){
+
+.summary-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.expense-top{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:8px;
+
+}
+
+.action-buttons{
+
+flex-direction:column;
+
+}
+
+}
+
+/* ===========================
+   SHEET HEADER
+=========================== */
+
+.sheet-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.close-btn{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f3f4f6;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.3s;
+
+}
+
+.close-btn:hover{
+
+    background:#e5e7eb;
+
+}
+
+.close-btn i{
+
+    font-size:18px;
+
+    color:#555;
+
+}
