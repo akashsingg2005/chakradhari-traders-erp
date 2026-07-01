@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api/v1";
+const API = "https://chakradhari-traders-erp.onrender.com/api/v1";
 
 const token = localStorage.getItem("token");
 const customerId = localStorage.getItem("customerId");

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/v1/auth/login";
+const API_URL = "https://chakradhari-traders-erp.onrender.com/api/v1/auth/login";
 
 const loginForm = document.getElementById("loginForm");
 

@@ -2,7 +2,7 @@
 // CUSTOMER MODULE
 // =====================================
 
-const API = "http://localhost:5000/api/v1/party";
+const API = "https://chakradhari-traders-erp.onrender.com/api/v1/party";
 
 const token = localStorage.getItem("token");
 const businessId = localStorage.getItem("businessId");
