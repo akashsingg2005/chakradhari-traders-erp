@@ -30,6 +30,7 @@ window.onload = () => {
         addItem();
 
     }
+    calculate();
 
 };
 
@@ -196,7 +197,7 @@ function renderItems(){
                 <button
                     type="button"
                     class="delete-icon"
-                    onclick="removeItem(${index})">
+                    oninput="removeItem(${index})">
 
                     <i class="fa-solid fa-trash"></i>
 
@@ -216,7 +217,7 @@ function renderItems(){
 
                 placeholder="e.g. Main Gate"
 
-                onchange="updateItem(${index},'itemName',this.value)">
+                oninput="updateItem(${index},'itemName',this.value)">
 
             <div class="grid-2">
 
@@ -234,7 +235,7 @@ function renderItems(){
 
                         value="${item.quantity}"
 
-                        onchange="updateItem(${index},'quantity',this.value)">
+                        oninput="updateItem(${index},'quantity',this.value)">
 
                 </div>
 
@@ -248,7 +249,7 @@ function renderItems(){
 
                     <select
 
-                        onchange="updateItem(${index},'unit',this.value)">
+                        oninput="updateItem(${index},'unit',this.value)">
 
                         <option ${item.unit=="Nos"?"selected":""}>Nos</option>
 
@@ -284,7 +285,7 @@ function renderItems(){
 
                         value="${item.rate}"
 
-                        onchange="updateItem(${index},'rate',this.value)">
+                        oninput="updateItem(${index},'rate',this.value)">
 
                 </div>
 
@@ -410,11 +411,23 @@ function calculate(){
 // AUTO RECALCULATE
 // =============================
 
+document.getElementById("labourCharge")
+.addEventListener("input", calculate);
+
+document.getElementById("transportCharge")
+.addEventListener("input", calculate);
+
+document.getElementById("installationCharge")
+.addEventListener("input", calculate);
+
+document.getElementById("otherCharge")
+.addEventListener("input", calculate);
+
 document.getElementById("discountType")
-.addEventListener("change",calculate);
+.addEventListener("change", calculate);
 
 document.getElementById("discountValue")
-.addEventListener("input",calculate);
+.addEventListener("input", calculate);
 
 // =============================
 // SAVE WORK
