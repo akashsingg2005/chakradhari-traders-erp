@@ -20,10 +20,15 @@ const workSchema = new mongoose.Schema({
         required: true
     },
 
-    workNumber: {
-        type: String,
-        unique: true
-    },
+    workNumber:{
+
+    type:String,
+
+    required:true,
+
+    trim:true
+
+},
 
     invoiceNumber: {
         type: String,
