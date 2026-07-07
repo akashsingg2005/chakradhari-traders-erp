@@ -197,7 +197,7 @@ function renderItems(){
                 <button
                     type="button"
                     class="delete-icon"
-                    oninput="removeItem(${index})">
+                    onchange="removeItem(${index})">
 
                     <i class="fa-solid fa-trash"></i>
 
@@ -217,7 +217,7 @@ function renderItems(){
 
                 placeholder="e.g. Main Gate"
 
-                oninput="updateItem(${index},'itemName',this.value)">
+                onchange="updateItem(${index},'itemName',this.value)">
 
             <div class="grid-2">
 
@@ -235,7 +235,7 @@ function renderItems(){
 
                         value="${item.quantity}"
 
-                        oninput="updateItem(${index},'quantity',this.value)">
+                        onchange="updateItem(${index},'quantity',this.value)">
 
                 </div>
 
@@ -249,7 +249,7 @@ function renderItems(){
 
                     <select
 
-                        oninput="updateItem(${index},'unit',this.value)">
+                        onchange="updateItem(${index},'unit',this.value)">
 
                         <option ${item.unit=="Nos"?"selected":""}>Nos</option>
 
@@ -285,7 +285,7 @@ function renderItems(){
 
                         value="${item.rate}"
 
-                        oninput="updateItem(${index},'rate',this.value)">
+                        onchange="updateItem(${index},'rate',this.value)">
 
                 </div>
 
