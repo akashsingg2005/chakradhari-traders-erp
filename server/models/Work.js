@@ -187,4 +187,14 @@ const workSchema = new mongoose.Schema({
     timestamps: true
 });
 
+workSchema.index(
+    {
+        business: 1,
+        workNumber: 1
+    },
+    {
+        unique: true
+    }
+);
+
 module.exports = mongoose.model("Work", workSchema);
