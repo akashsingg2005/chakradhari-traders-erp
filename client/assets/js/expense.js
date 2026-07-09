@@ -544,8 +544,33 @@ function editExpense(id){
     document.getElementById("title").value =
         editingExpense.title;
 
+const predefined = [
+    "Material",
+    "Transport",
+    "Salary",
+    "Electricity",
+    "Rent",
+    "Food",
+    "Maintenance"
+];
+
+if(predefined.includes(editingExpense.category)){
+
     document.getElementById("category").value =
-        editingExpense.category;
+    editingExpense.category;
+
+    document.getElementById("otherCategory").style.display = "none";
+
+}else{
+
+    document.getElementById("category").value = "Other";
+
+    document.getElementById("otherCategory").style.display = "block";
+
+    document.getElementById("otherCategory").value =
+    editingExpense.category;
+
+}
 
     document.getElementById("amount").value =
         editingExpense.amount;
@@ -574,7 +599,13 @@ async function saveExpense(){
 
         title: document.getElementById("title").value,
 
-        category: document.getElementById("category").value,
+        category:
+
+document.getElementById("category").value === "Other"
+
+? document.getElementById("otherCategory").value
+
+: document.getElementById("category").value,
 
         amount: Number(
             document.getElementById("amount").value
@@ -669,3 +700,32 @@ async function deleteExpense(id){
     loadExpenses();
 
 }
+
+
+// ==========================
+// Other Category
+// ==========================
+
+const category = document.getElementById("category");
+
+const otherCategory = document.getElementById("otherCategory");
+
+category.addEventListener("change", () => {
+
+    if(category.value === "Other"){
+
+        otherCategory.style.display = "block";
+
+        otherCategory.required = true;
+
+    }else{
+
+        otherCategory.style.display = "none";
+
+        otherCategory.required = false;
+
+        otherCategory.value = "";
+
+    }
+
+});
