@@ -15,6 +15,7 @@ exports.addExpense = async (req, res) => {
             business: req.body.business,
 
             category: req.body.category,
+customCategory: req.body.customCategory,
 
             title: req.body.title,
 
@@ -119,6 +120,7 @@ exports.updateExpense = async (req, res) => {
             {
 
                 category: req.body.category,
+customCategory: req.body.customCategory,
 
                 title: req.body.title,
 
