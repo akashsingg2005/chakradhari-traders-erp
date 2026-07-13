@@ -14,20 +14,12 @@ const expenseSchema = new mongoose.Schema({
         required: true
     },
 
-    category: {
-        type: String,
-        enum: [
-            "Material",
-            "Transport",
-            "Salary",
-            "Electricity",
-            "Rent",
-            "Food",
-            "Maintenance",
-            "Other"
-        ],
-        default: "Other"
-    },
+category: {
+    type: String,
+    required: true,
+    trim: true,
+    default: "Other"
+},
 
     title: {
         type: String,
