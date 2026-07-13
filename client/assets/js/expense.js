@@ -599,13 +599,12 @@ async function saveExpense(){
 
         title: document.getElementById("title").value,
 
-        category:
+        category: document.getElementById("category").value,
 
-document.getElementById("category").value === "Other"
-
-? document.getElementById("otherCategory").value
-
-: document.getElementById("category").value,
+customCategory:
+    document.getElementById("category").value === "Other"
+        ? document.getElementById("otherCategory").value
+        : "",
 
         amount: Number(
             document.getElementById("amount").value
