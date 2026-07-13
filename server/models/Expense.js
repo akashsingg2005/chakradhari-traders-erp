@@ -21,6 +21,11 @@ category: {
     default: "Other"
 },
 
+    customCategory: {
+    type: String,
+    default: ""
+},
+
     title: {
         type: String,
         required: true,
