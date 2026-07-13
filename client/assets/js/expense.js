@@ -229,9 +229,11 @@ ${expense.title}
 <div class="expense-details">
 
 <span class="badge ${expense.category.toLowerCase()}">
-
-${expense.category}
-
+    ${
+        expense.category === "Other"
+            ? (expense.customCategory || "Other")
+            : expense.category
+    }
 </span>
 
 <span>
@@ -435,7 +437,11 @@ function searchExpense(){
 
         expense.title.toLowerCase().includes(search) ||
 
-        expense.category.toLowerCase().includes(search) ||
+        (
+    expense.category === "Other"
+        ? (expense.customCategory || "")
+        : expense.category
+).toLowerCase().includes(search) ||
 
         (expense.notes || "").toLowerCase().includes(search)
 
@@ -554,24 +560,26 @@ const predefined = [
     "Maintenance"
 ];
 
-if(predefined.includes(editingExpense.category)){
-
-    document.getElementById("category").value =
-    editingExpense.category;
-
-    document.getElementById("otherCategory").style.display = "none";
-
-}else{
+if (editingExpense.category === "Other") {
 
     document.getElementById("category").value = "Other";
 
     document.getElementById("otherCategory").style.display = "block";
 
     document.getElementById("otherCategory").value =
-    editingExpense.category;
+        editingExpense.customCategory || "";
+
+} else {
+
+    document.getElementById("category").value =
+        editingExpense.category;
+
+    document.getElementById("otherCategory").style.display = "none";
+
+    document.getElementById("otherCategory").value = "";
 
 }
-
+    
     document.getElementById("amount").value =
         editingExpense.amount;
 
