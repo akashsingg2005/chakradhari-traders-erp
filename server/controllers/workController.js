@@ -133,28 +133,89 @@ exports.createWork = async (req, res) => {
         const finalAmount = subtotal - discountAmount;
 
         // -----------------------------
-        // Business-wise Work Number
-        // -----------------------------
+// Business-wise Work Number
+// -----------------------------
+// Get the highest existing work number instead of
+// counting documents. This prevents number reuse
+// when an old work is deleted.
 
-        const workCount = await Work.countDocuments({
+const lastWork = await Work.findOne({
+    owner: req.user._id,
+    business
+})
+.sort({ workNumber: -1 })
+.lean();
+
+let nextNumber = 1;
+
+if (lastWork && lastWork.workNumber) {
+
+    const lastNumber = parseInt(
+        lastWork.workNumber.replace("WK", ""),
+        10
+    );
+
+    if (!isNaN(lastNumber)) {
+        nextNumber = lastNumber + 1;
+    }
+
+}
+
+const workNumber =
+    "WK" +
+    String(nextNumber).padStart(5, "0");
+
+        // -----------------------------
+// Generate & Create Work Safely
+// -----------------------------
+
+let work;
+
+for (let attempt = 0; attempt < 5; attempt++) {
+
+    try {
+
+        const lastWork = await Work.findOne({
 
             owner: req.user._id,
 
             business
 
-        });
+        })
+        .sort({
+
+            workNumber: -1
+
+        })
+        .lean();
+
+        let nextNumber = 1;
+
+        if (lastWork && lastWork.workNumber) {
+
+            const lastNumber = parseInt(
+
+                lastWork.workNumber.replace("WK", ""),
+
+                10
+
+            );
+
+            if (!isNaN(lastNumber)) {
+
+                nextNumber = lastNumber + 1;
+
+            }
+
+        }
 
         const workNumber =
 
             "WK" +
 
-            String(workCount + 1).padStart(5, "0");
+            String(nextNumber).padStart(5, "0");
 
-        // -----------------------------
-        // Create Work
-        // -----------------------------
-
-        const work = await Work.create({
+        work = await Work.create({
 
             owner: req.user._id,
 
@@ -208,6 +269,49 @@ exports.createWork = async (req, res) => {
 
         });
 
+        // Successfully created
+
+        break;
+
+    }
+
+    catch (error) {
+
+        // Duplicate work number caused by
+        // simultaneous Save requests.
+        // Try generating the next number again.
+
+        if (
+
+            error.code === 11000 &&
+
+            error.keyPattern &&
+
+            error.keyPattern.business &&
+
+            error.keyPattern.workNumber
+
+        ) {
+
+            if (attempt === 4) {
+
+                throw new Error(
+
+                    "Unable to generate a unique work number. Please try again."
+
+                );
+
+            }
+
+            continue;
+
+        }
+
+        throw error;
+
+    }
+
+}
         // -----------------------------
         // Save Items
         // -----------------------------
