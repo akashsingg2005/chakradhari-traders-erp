@@ -225,32 +225,3 @@ function toggleChargeRow(rowId, valId, amount, isDiscount = false) {
         if (row) row.style.display = "none";
     }
 }
-
-// Download PDF
-document.getElementById("downloadBtn").addEventListener("click", async () => {
-    const invoice = document.getElementById("invoice");
-    const invNum = document.getElementById("invoiceNumber").innerText || "Invoice";
-
-    document.body.classList.add("pdf-mode");
-
-    const opt = {
-        margin: [5, 5, 5, 5],
-        filename: `Invoice-${invNum}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: {
-            scale: 2,
-            useCORS: true,
-            logging: false,
-            windowWidth: 850
-        },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-    };
-
-    try {
-        await html2pdf().set(opt).from(invoice).save();
-    } catch (err) {
-        console.error("PDF generation error:", err);
-    } finally {
-        document.body.classList.remove("pdf-mode");
-    }
-});
