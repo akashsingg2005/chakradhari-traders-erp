@@ -213,6 +213,38 @@ function renderWorks(){
 
         }
 
+        const statusDate = work.statusUpdatedAt || work.updatedAt || work.createdAt;
+
+        let formattedStatusDate = "";
+
+        if(statusDate){
+
+            const d = new Date(statusDate);
+
+            const dateStr = d.toLocaleDateString("en-IN", {
+
+                day: "2-digit",
+
+                month: "short",
+
+                year: "numeric"
+
+            });
+
+            const timeStr = d.toLocaleTimeString("en-IN", {
+
+                hour: "2-digit",
+
+                minute: "2-digit",
+
+                hour12: true
+
+            });
+
+            formattedStatusDate = `${dateStr}, ${timeStr}`;
+
+        }
+
         workList.innerHTML += `
 
         <div class="work-card">
@@ -249,11 +281,25 @@ function renderWorks(){
 
             </div>
 
-            <span class="status ${statusClass}">
+            <div class="status-row">
 
-                ${work.workStatus}
+                <span class="status ${statusClass}">
 
-            </span>
+                    ${work.workStatus}
+
+                </span>
+
+                ${formattedStatusDate ? `
+
+                <small class="status-time">
+
+                    <i class="fa-regular fa-clock"></i> ${formattedStatusDate}
+
+                </small>
+
+                ` : ''}
+
+            </div>
 
             <div class="work-bottom">
 

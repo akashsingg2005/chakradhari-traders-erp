@@ -156,6 +156,19 @@ body{
     font-size:18px;
 }
 
+.status-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.status-row .status{
+    margin-bottom:0;
+}
+
 .status{
     display:inline-block;
     padding:6px 14px;
@@ -163,6 +176,15 @@ body{
     font-size:13px;
     font-weight:600;
     margin-bottom:15px;
+}
+
+.status-time{
+    color:#6b7280;
+    font-size:12px;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:5px;
 }
 
 .status.pending{

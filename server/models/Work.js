@@ -83,6 +83,11 @@ const workSchema = new mongoose.Schema({
     default: "Draft"
 },
 
+    statusUpdatedAt: {
+        type: Date,
+        default: Date.now
+    },
+
     expectedDeliveryDate: {
         type: Date
     },

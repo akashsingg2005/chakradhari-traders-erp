@@ -265,6 +265,8 @@ for (let attempt = 0; attempt < 5; attempt++) {
 
             workStatus: "Draft",
 
+            statusUpdatedAt: new Date(),
+
             notes
 
         });
@@ -788,6 +790,20 @@ exports.updateWorkStatus = async (req,res)=>{
 
     try{
 
+        const updateData = {
+
+            workStatus: req.body.workStatus,
+
+            statusUpdatedAt: new Date()
+
+        };
+
+        if(["Closed", "Delivered", "Completed"].includes(req.body.workStatus)){
+
+            updateData.completedDate = new Date();
+
+        }
+
         const work = await Work.findOneAndUpdate(
 
             {
@@ -798,11 +814,7 @@ exports.updateWorkStatus = async (req,res)=>{
 
             },
 
-            {
-
-                workStatus:req.body.workStatus
-
-            },
+            updateData,
 
             {
 
