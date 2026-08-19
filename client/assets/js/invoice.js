@@ -10,12 +10,6 @@ const workId = localStorage.getItem("workId");
 
 window.onload = () => {
 
-    if (!workId) {
-        alert("No work selected for invoice.");
-        history.back();
-        return;
-    }
-
     loadInvoice();
 
 };
@@ -74,154 +68,99 @@ async function loadInvoice(){
 
 function renderInvoice(data){
 
-    const business = data.business || {};
+    const business = data.business;
 
-    const customer = data.customer || {};
+    const customer = data.customer;
 
-    const work = data.work || {};
+    const work = data.work;
 
-    const items = data.items || [];
+    const items = data.items;
 
-    // Business Details
-    const bizName = business.businessName || "Business Name";
-    document.getElementById("businessName").innerText = bizName;
-    document.getElementById("businessBadge").innerText = bizName.charAt(0).toUpperCase();
+    // Business
 
-    if (document.getElementById("signatoryBusinessName")) {
-        document.getElementById("signatoryBusinessName").innerText = bizName;
-    }
+    document.getElementById("businessName").innerText =
+        business.businessName;
 
-    const ownerText = business.ownerName ? `Prop: ${business.ownerName}` : "";
-    document.getElementById("businessOwner").innerText = ownerText;
+    document.getElementById("businessAddress").innerText =
+        business.address || "-";
 
-    document.getElementById("businessAddress").innerText = business.address ? `📍 ${business.address}` : "";
+    document.getElementById("businessMobile").innerText =
+        business.mobile || "-";
 
-    const contactParts = [];
-    if (business.mobile) contactParts.push(`📞 ${business.mobile}`);
-    if (business.email) contactParts.push(`✉️ ${business.email}`);
-    document.getElementById("businessContact").innerText = contactParts.join("  |  ");
+    // Invoice
 
-    if (business.gstNumber) {
-        document.getElementById("businessGst").innerText = `GSTIN: ${business.gstNumber}`;
-    } else {
-        document.getElementById("businessGst").innerText = "";
-    }
+    document.getElementById("invoiceNumber").innerText =
+        work.invoiceNumber || work.workNumber;
 
-    // Invoice Meta
-    document.getElementById("invoiceNumber").innerText = work.invoiceNumber || work.workNumber || "-";
-    document.getElementById("workNumber").innerText = work.workNumber || "-";
+    document.getElementById("invoiceDate").innerText =
+        new Date().toLocaleDateString();
 
-    const invDate = new Date().toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric"
-    });
-    document.getElementById("invoiceDate").innerText = invDate;
+    // Customer
 
-    // Customer Details
-    document.getElementById("customerName").innerText = customer.name || "Customer Name";
-    document.getElementById("customerMobile").innerText = customer.mobile ? `📞 ${customer.mobile}` : "";
-    document.getElementById("customerAddress").innerText = customer.address ? `📍 ${customer.address}` : "";
+    document.getElementById("customerName").innerText =
+        customer.name;
 
-    // Work Details
-    document.getElementById("workName").innerText = work.workName || "General Work";
-    document.getElementById("workTypeLabel").innerText = work.workType ? `Type: ${work.workType}` : "";
-    document.getElementById("customerRefLabel").innerText = work.customerReference ? `Ref: ${work.customerReference}` : "";
+    document.getElementById("customerMobile").innerText =
+        customer.mobile || "-";
 
-    // Status Badges
-    const statusContainer = document.getElementById("statusBadges");
-    if (statusContainer) {
-        const pStatusClass = work.paymentStatus === "Completed" ? "badge-success" : (work.paymentStatus === "Partially Paid" ? "badge-warning" : "badge-danger");
-        const wStatusClass = work.workStatus === "Completed" || work.workStatus === "Delivered" ? "badge-success" : "badge-info";
+    document.getElementById("customerAddress").innerText =
+        customer.address || "-";
 
-        statusContainer.innerHTML = `
-            <span class="badge ${pStatusClass}">Payment: ${work.paymentStatus || "Pending"}</span>
-            <span class="badge ${wStatusClass}">Status: ${work.workStatus || "Draft"}</span>
-        `;
-    }
+    // Items
 
-    // Items Table (with Unit column!)
     const table = document.getElementById("itemTable");
 
     table.innerHTML = "";
 
-    if (items.length === 0) {
-        table.innerHTML = `
-            <tr>
-                <td colspan="6" style="text-align:center; padding: 20px; color: #6b7280;">No items found</td>
-            </tr>
+    items.forEach(item=>{
+
+        table.innerHTML += `
+
+        <tr>
+
+            <td>${item.itemName}</td>
+
+            <td>${item.quantity}</td>
+
+            <td>${item.unit || "Nos"}</td>
+
+            <td>₹${item.rate}</td>
+
+            <td>₹${item.amount}</td>
+
+        </tr>
+
         `;
-    } else {
-        items.forEach((item, index) => {
-            const descHtml = item.description ? `<div class="item-desc">${item.description}</div>` : "";
-            const unitText = item.unit || "Nos";
-            const qtyText = Number(item.quantity || 0).toLocaleString();
-            const rateText = "₹" + Number(item.rate || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            const amountText = "₹" + Number(item.amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            table.innerHTML += `
-            <tr>
-                <td class="col-sr">${index + 1}</td>
-                <td class="col-item">
-                    <div class="item-title">${item.itemName}</div>
-                    ${descHtml}
-                </td>
-                <td class="col-qty">${qtyText}</td>
-                <td class="col-unit"><span class="unit-tag">${unitText}</span></td>
-                <td class="col-rate">${rateText}</td>
-                <td class="col-amount">${amountText}</td>
-            </tr>
-            `;
-        });
-    }
+    });
 
-    // Totals & Charges
-    document.getElementById("subtotal").innerText = "₹" + Number(work.subtotal || 0).toLocaleString(undefined, { minimumFractionDigits: 2 });
+    // Totals
 
-    toggleChargeRow("labourRow", "labour", work.labourCharge);
-    toggleChargeRow("transportRow", "transport", work.transportCharge);
-    toggleChargeRow("installationRow", "installation", work.installationCharge);
-    toggleChargeRow("otherRow", "other", work.otherCharge);
-    toggleChargeRow("discountRow", "discount", work.discountAmount, true);
+    document.getElementById("subtotal").innerText =
+        "₹"+work.subtotal;
 
-    document.getElementById("grandTotal").innerText = "₹" + Number(work.finalAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 });
+    document.getElementById("labour").innerText =
+        "₹"+work.labourCharge;
 
-    document.getElementById("received").innerText = "₹" + Number(work.receivedAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 });
+    document.getElementById("transport").innerText =
+        "₹"+work.transportCharge;
 
-    const pendingVal = Number(work.pendingAmount || 0);
-    const pendingElem = document.getElementById("pending");
-    pendingElem.innerText = "₹" + pendingVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
+    document.getElementById("installation").innerText =
+        "₹"+work.installationCharge;
 
-    if (pendingVal <= 0) {
-        pendingElem.style.color = "#16a34a";
-    } else {
-        pendingElem.style.color = "#dc2626";
-    }
+    document.getElementById("other").innerText =
+        "₹"+work.otherCharge;
 
-    // Notes Container
-    const notesContainer = document.getElementById("notesContainer");
-    let notesHtml = "";
-    if (work.description) {
-        notesHtml += `<p><strong>Description:</strong> ${work.description}</p>`;
-    }
-    if (work.labourNote) {
-        notesHtml += `<p><strong>Labour Note:</strong> ${work.labourNote}</p>`;
-    }
-    if (work.notes) {
-        notesHtml += `<p><strong>Notes:</strong> ${work.notes}</p>`;
-    }
-    notesContainer.innerHTML = notesHtml;
-}
+    document.getElementById("discount").innerText =
+        "- ₹"+work.discountAmount;
 
-function toggleChargeRow(rowId, valId, amount, isDiscount = false) {
-    const row = document.getElementById(rowId);
-    const elem = document.getElementById(valId);
-    const val = Number(amount || 0);
+    document.getElementById("grandTotal").innerText =
+        "₹"+work.finalAmount;
 
-    if (val > 0) {
-        if (row) row.style.display = "flex";
-        if (elem) elem.innerText = (isDiscount ? "- ₹" : "₹") + val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    } else {
-        if (row) row.style.display = "none";
-    }
+    document.getElementById("received").innerText =
+        "₹"+work.receivedAmount;
+
+    document.getElementById("pending").innerText =
+        "₹"+work.pendingAmount;
+
 }

@@ -19,217 +19,173 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
 </head>
 
 <body>
 
-<!-- Action Toolbar -->
-<div class="buttons">
+<div class="invoice-container" id="invoice">
 
-    <button class="btn-secondary" onclick="history.back()">
-        <i class="fa-solid fa-arrow-left"></i> Back
-    </button>
+    <div class="invoice-header">
 
-    <button class="btn-primary" onclick="window.print()">
-        <i class="fa-solid fa-print"></i> Print Invoice
-    </button>
+        <h1 id="businessName">
+
+            Business Name
+
+        </h1>
+
+        <p id="businessAddress"></p>
+
+        <p id="businessMobile"></p>
+
+    </div>
+
+    <div class="invoice-info">
+
+        <div>
+
+            <strong>Invoice No</strong>
+
+            <p id="invoiceNumber"></p>
+
+        </div>
+
+        <div>
+
+            <strong>Date</strong>
+
+            <p id="invoiceDate"></p>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="customer-box">
+
+        <h3>Bill To</h3>
+
+        <p id="customerName"></p>
+
+        <p id="customerMobile"></p>
+
+        <p id="customerAddress"></p>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Item</th>
+
+                <th>Qty</th>
+
+                <th>Unit</th>
+
+                <th>Rate</th>
+
+                <th>Amount</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="itemTable">
+
+        </tbody>
+
+    </table>
+
+    <div class="total-box">
+
+        <div>
+
+            <span>Subtotal</span>
+
+            <span id="subtotal"></span>
+
+        </div>
+
+        <div>
+
+            <span>Labour</span>
+
+            <span id="labour"></span>
+
+        </div>
+
+        <div>
+
+            <span>Transport</span>
+
+            <span id="transport"></span>
+
+        </div>
+
+        <div>
+
+            <span>Installation</span>
+
+            <span id="installation"></span>
+
+        </div>
+
+        <div>
+
+            <span>Other</span>
+
+            <span id="other"></span>
+
+        </div>
+
+        <div>
+
+            <span>Discount</span>
+
+            <span id="discount"></span>
+
+        </div>
+
+        <hr>
+
+        <div class="grand-total">
+
+            <span>Total</span>
+
+            <span id="grandTotal"></span>
+
+        </div>
+
+        <div>
+
+            <span>Received</span>
+
+            <span id="received"></span>
+
+        </div>
+
+        <div>
+
+            <span>Pending</span>
+
+            <span id="pending"></span>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div class="invoice-container" id="invoice">
+<div class="buttons">
 
-    <!-- Header Section -->
-    <div class="invoice-header">
+    <button onclick="window.print()">
 
-        <div class="business-info">
-            <div class="business-badge" id="businessBadge">B</div>
-            <div>
-                <h1 id="businessName">Business Name</h1>
-                <p id="businessOwner" class="owner-name"></p>
-                <p id="businessAddress"></p>
-                <p id="businessContact"></p>
-                <p id="businessGst" class="gst-text"></p>
-            </div>
-        </div>
+        🖨 Print Invoice
 
-        <div class="invoice-badge-box">
-            <h2 class="invoice-title">INVOICE</h2>
-            <div class="invoice-meta">
-                <div>
-                    <span>Invoice No:</span>
-                    <strong id="invoiceNumber">-</strong>
-                </div>
-                <div>
-                    <span>Work No:</span>
-                    <strong id="workNumber">-</strong>
-                </div>
-                <div>
-                    <span>Date:</span>
-                    <strong id="invoiceDate">-</strong>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Details Grid -->
-    <div class="details-grid">
-
-        <div class="info-card bill-to">
-            <div class="card-label"><i class="fa-solid fa-user"></i> BILL TO</div>
-            <h3 id="customerName">-</h3>
-            <p id="customerMobile"></p>
-            <p id="customerAddress"></p>
-        </div>
-
-        <div class="info-card work-details">
-            <div class="card-label"><i class="fa-solid fa-briefcase"></i> WORK DETAILS</div>
-            <h3 id="workName">-</h3>
-            <p id="workTypeLabel"></p>
-            <p id="customerRefLabel"></p>
-            <div class="status-badges" id="statusBadges"></div>
-        </div>
-
-    </div>
-
-    <!-- Items Table -->
-    <div class="table-responsive">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th class="col-sr">#</th>
-
-                    <th class="col-item">Item & Description</th>
-
-                    <th class="col-qty">Qty</th>
-
-                    <th class="col-unit">Unit</th>
-
-                    <th class="col-rate">Rate</th>
-
-                    <th class="col-amount">Amount</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="itemTable">
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <!-- Summary & Totals -->
-    <div class="summary-section">
-
-        <div class="notes-box">
-            <div id="notesContainer"></div>
-            <div class="terms-text">
-                <p><strong>Terms & Conditions:</strong></p>
-                <p>• Goods once sold will not be taken back unless damaged.</p>
-                <p>• Thank you for doing business with us!</p>
-            </div>
-        </div>
-
-        <div class="total-box">
-
-            <div class="total-row">
-
-                <span>Subtotal</span>
-
-                <span id="subtotal">₹0</span>
-
-            </div>
-
-            <div class="total-row" id="labourRow">
-
-                <span>Labour Charge</span>
-
-                <span id="labour">₹0</span>
-
-            </div>
-
-            <div class="total-row" id="transportRow">
-
-                <span>Transport Charge</span>
-
-                <span id="transport">₹0</span>
-
-            </div>
-
-            <div class="total-row" id="installationRow">
-
-                <span>Installation Charge</span>
-
-                <span id="installation">₹0</span>
-
-            </div>
-
-            <div class="total-row" id="otherRow">
-
-                <span>Other Charge</span>
-
-                <span id="other">₹0</span>
-
-            </div>
-
-            <div class="total-row discount-row" id="discountRow">
-
-                <span>Discount</span>
-
-                <span id="discount">- ₹0</span>
-
-            </div>
-
-            <div class="total-row grand-total">
-
-                <span>Grand Total</span>
-
-                <span id="grandTotal">₹0</span>
-
-            </div>
-
-            <div class="total-row received-row">
-
-                <span>Amount Received</span>
-
-                <span id="received">₹0</span>
-
-            </div>
-
-            <div class="total-row pending-row" id="pendingRowContainer">
-
-                <span>Balance Due</span>
-
-                <span id="pending">₹0</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="invoice-footer">
-
-        <div class="signatory-box">
-            <p>For <strong id="signatoryBusinessName">Business</strong></p>
-            <div class="sign-space"></div>
-            <p>Authorized Signatory</p>
-        </div>
-
-    </div>
+    </button>
 
 </div>
 
