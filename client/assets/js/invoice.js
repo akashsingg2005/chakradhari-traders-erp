@@ -164,3 +164,44 @@ function renderInvoice(data){
         "₹"+work.pendingAmount;
 
 }
+
+// ===========================
+// Download PDF
+// ===========================
+
+document.getElementById("downloadBtn").addEventListener("click", () => {
+
+    const invoice = document.getElementById("invoice");
+
+    const opt = {
+
+        margin: [8, 8, 8, 8],
+
+        filename: `Invoice-${document.getElementById("invoiceNumber").innerText}.pdf`,
+
+        image: {
+            type: "jpeg",
+            quality: 1
+        },
+
+        html2canvas: {
+            scale: 3,
+            useCORS: true,
+            scrollY: 0
+        },
+
+        jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+        },
+
+        pagebreak: {
+            mode: ["avoid-all", "css", "legacy"]
+        }
+
+    };
+
+    html2pdf().set(opt).from(invoice).save();
+
+});
