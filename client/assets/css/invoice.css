@@ -528,3 +528,56 @@ table td.col-rate, table td.col-amount {
     size: A4;
     margin: 10mm;
 }
+
+/* PDF Generation Mode (Enforces Desktop A4 Layout for PDF capture even on Mobile) */
+body.pdf-mode {
+    background: #ffffff !important;
+    padding: 0 !important;
+}
+
+body.pdf-mode .buttons {
+    display: none !important;
+}
+
+body.pdf-mode .invoice-container {
+    max-width: 800px !important;
+    width: 800px !important;
+    padding: 30px !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+body.pdf-mode .invoice-header {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+}
+
+body.pdf-mode .invoice-badge-box {
+    text-align: right !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+}
+
+body.pdf-mode .invoice-title {
+    font-size: 28px !important;
+    margin-bottom: 10px !important;
+}
+
+body.pdf-mode .details-grid {
+    grid-template-columns: 1fr 1fr !important;
+}
+
+body.pdf-mode .business-info h1 {
+    font-size: 24px !important;
+}
+
+body.pdf-mode table th, body.pdf-mode table td {
+    padding: 12px 14px !important;
+    font-size: 13px !important;
+}
+
+body.pdf-mode .summary-section {
+    grid-template-columns: 1.2fr 1fr !important;
+}
