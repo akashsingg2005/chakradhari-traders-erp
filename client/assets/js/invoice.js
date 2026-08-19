@@ -111,11 +111,11 @@ function renderInvoice(data){
     document.getElementById("invoiceNumber").innerText = work.invoiceNumber || work.workNumber || "-";
     document.getElementById("workNumber").innerText = work.workNumber || "-";
 
-    const invDate = work.createdAt ? new Date(work.createdAt).toLocaleDateString("en-IN", {
+    const invDate = new Date().toLocaleDateString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric"
-    }) : "-";
+    });
     document.getElementById("invoiceDate").innerText = invDate;
 
     // Customer Details
