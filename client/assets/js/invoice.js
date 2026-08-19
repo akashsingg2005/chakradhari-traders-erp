@@ -10,6 +10,12 @@ const workId = localStorage.getItem("workId");
 
 window.onload = () => {
 
+    if (!workId) {
+        alert("No work selected for invoice.");
+        history.back();
+        return;
+    }
+
     loadInvoice();
 
 };
@@ -68,138 +74,170 @@ async function loadInvoice(){
 
 function renderInvoice(data){
 
-    const business = data.business;
+    const business = data.business || {};
 
-    const customer = data.customer;
+    const customer = data.customer || {};
 
-    const work = data.work;
+    const work = data.work || {};
 
-    const items = data.items;
+    const items = data.items || [];
 
-    // Business
+    // Business Details
+    const bizName = business.businessName || "Business Name";
+    document.getElementById("businessName").innerText = bizName;
+    document.getElementById("businessBadge").innerText = bizName.charAt(0).toUpperCase();
 
-    document.getElementById("businessName").innerText =
-        business.businessName;
+    if (document.getElementById("signatoryBusinessName")) {
+        document.getElementById("signatoryBusinessName").innerText = bizName;
+    }
 
-    document.getElementById("businessAddress").innerText =
-        business.address || "-";
+    const ownerText = business.ownerName ? `Prop: ${business.ownerName}` : "";
+    document.getElementById("businessOwner").innerText = ownerText;
 
-    document.getElementById("businessMobile").innerText =
-        business.mobile || "-";
+    document.getElementById("businessAddress").innerText = business.address ? `📍 ${business.address}` : "";
 
-    // Invoice
+    const contactParts = [];
+    if (business.mobile) contactParts.push(`📞 ${business.mobile}`);
+    if (business.email) contactParts.push(`✉️ ${business.email}`);
+    document.getElementById("businessContact").innerText = contactParts.join("  |  ");
 
-    document.getElementById("invoiceNumber").innerText =
-        work.invoiceNumber || work.workNumber;
+    if (business.gstNumber) {
+        document.getElementById("businessGst").innerText = `GSTIN: ${business.gstNumber}`;
+    } else {
+        document.getElementById("businessGst").innerText = "";
+    }
 
-    document.getElementById("invoiceDate").innerText =
-        new Date(work.createdAt).toLocaleDateString();
+    // Invoice Meta
+    document.getElementById("invoiceNumber").innerText = work.invoiceNumber || work.workNumber || "-";
+    document.getElementById("workNumber").innerText = work.workNumber || "-";
 
-    // Customer
+    const invDate = work.createdAt ? new Date(work.createdAt).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    }) : "-";
+    document.getElementById("invoiceDate").innerText = invDate;
 
-    document.getElementById("customerName").innerText =
-        customer.name;
+    // Customer Details
+    document.getElementById("customerName").innerText = customer.name || "Customer Name";
+    document.getElementById("customerMobile").innerText = customer.mobile ? `📞 ${customer.mobile}` : "";
+    document.getElementById("customerAddress").innerText = customer.address ? `📍 ${customer.address}` : "";
 
-    document.getElementById("customerMobile").innerText =
-        customer.mobile || "-";
+    // Work Details
+    document.getElementById("workName").innerText = work.workName || "General Work";
+    document.getElementById("workTypeLabel").innerText = work.workType ? `Type: ${work.workType}` : "";
+    document.getElementById("customerRefLabel").innerText = work.customerReference ? `Ref: ${work.customerReference}` : "";
 
-    document.getElementById("customerAddress").innerText =
-        customer.address || "-";
+    // Status Badges
+    const statusContainer = document.getElementById("statusBadges");
+    if (statusContainer) {
+        const pStatusClass = work.paymentStatus === "Completed" ? "badge-success" : (work.paymentStatus === "Partially Paid" ? "badge-warning" : "badge-danger");
+        const wStatusClass = work.workStatus === "Completed" || work.workStatus === "Delivered" ? "badge-success" : "badge-info";
 
-    // Items
+        statusContainer.innerHTML = `
+            <span class="badge ${pStatusClass}">Payment: ${work.paymentStatus || "Pending"}</span>
+            <span class="badge ${wStatusClass}">Status: ${work.workStatus || "Draft"}</span>
+        `;
+    }
 
+    // Items Table (with Unit column!)
     const table = document.getElementById("itemTable");
 
     table.innerHTML = "";
 
-    items.forEach(item=>{
-
-        table.innerHTML += `
-
-        <tr>
-
-            <td>${item.itemName}</td>
-
-            <td>${item.quantity}</td>
-
-            <td>₹${item.rate}</td>
-
-            <td>₹${item.amount}</td>
-
-        </tr>
-
+    if (items.length === 0) {
+        table.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center; padding: 20px; color: #6b7280;">No items found</td>
+            </tr>
         `;
+    } else {
+        items.forEach((item, index) => {
+            const descHtml = item.description ? `<div class="item-desc">${item.description}</div>` : "";
+            const unitText = item.unit || "Nos";
+            const qtyText = Number(item.quantity || 0).toLocaleString();
+            const rateText = "₹" + Number(item.rate || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const amountText = "₹" + Number(item.amount || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    });
+            table.innerHTML += `
+            <tr>
+                <td class="col-sr">${index + 1}</td>
+                <td class="col-item">
+                    <div class="item-title">${item.itemName}</div>
+                    ${descHtml}
+                </td>
+                <td class="col-qty">${qtyText}</td>
+                <td class="col-unit"><span class="unit-tag">${unitText}</span></td>
+                <td class="col-rate">${rateText}</td>
+                <td class="col-amount">${amountText}</td>
+            </tr>
+            `;
+        });
+    }
 
-    // Totals
+    // Totals & Charges
+    document.getElementById("subtotal").innerText = "₹" + Number(work.subtotal || 0).toLocaleString(undefined, { minimumFractionDigits: 2 });
 
-    document.getElementById("subtotal").innerText =
-        "₹"+work.subtotal;
+    toggleChargeRow("labourRow", "labour", work.labourCharge);
+    toggleChargeRow("transportRow", "transport", work.transportCharge);
+    toggleChargeRow("installationRow", "installation", work.installationCharge);
+    toggleChargeRow("otherRow", "other", work.otherCharge);
+    toggleChargeRow("discountRow", "discount", work.discountAmount, true);
 
-    document.getElementById("labour").innerText =
-        "₹"+work.labourCharge;
+    document.getElementById("grandTotal").innerText = "₹" + Number(work.finalAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 });
 
-    document.getElementById("transport").innerText =
-        "₹"+work.transportCharge;
+    document.getElementById("received").innerText = "₹" + Number(work.receivedAmount || 0).toLocaleString(undefined, { minimumFractionDigits: 2 });
 
-    document.getElementById("installation").innerText =
-        "₹"+work.installationCharge;
+    const pendingVal = Number(work.pendingAmount || 0);
+    const pendingElem = document.getElementById("pending");
+    pendingElem.innerText = "₹" + pendingVal.toLocaleString(undefined, { minimumFractionDigits: 2 });
 
-    document.getElementById("other").innerText =
-        "₹"+work.otherCharge;
+    if (pendingVal <= 0) {
+        pendingElem.style.color = "#16a34a";
+    } else {
+        pendingElem.style.color = "#dc2626";
+    }
 
-    document.getElementById("discount").innerText =
-        "- ₹"+work.discountAmount;
-
-    document.getElementById("grandTotal").innerText =
-        "₹"+work.finalAmount;
-
-    document.getElementById("received").innerText =
-        "₹"+work.receivedAmount;
-
-    document.getElementById("pending").innerText =
-        "₹"+work.pendingAmount;
-
+    // Notes Container
+    const notesContainer = document.getElementById("notesContainer");
+    let notesHtml = "";
+    if (work.description) {
+        notesHtml += `<p><strong>Description:</strong> ${work.description}</p>`;
+    }
+    if (work.labourNote) {
+        notesHtml += `<p><strong>Labour Note:</strong> ${work.labourNote}</p>`;
+    }
+    if (work.notes) {
+        notesHtml += `<p><strong>Notes:</strong> ${work.notes}</p>`;
+    }
+    notesContainer.innerHTML = notesHtml;
 }
 
-// ===========================
+function toggleChargeRow(rowId, valId, amount, isDiscount = false) {
+    const row = document.getElementById(rowId);
+    const elem = document.getElementById(valId);
+    const val = Number(amount || 0);
+
+    if (val > 0) {
+        if (row) row.style.display = "flex";
+        if (elem) elem.innerText = (isDiscount ? "- ₹" : "₹") + val.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    } else {
+        if (row) row.style.display = "none";
+    }
+}
+
 // Download PDF
-// ===========================
-
 document.getElementById("downloadBtn").addEventListener("click", () => {
-
     const invoice = document.getElementById("invoice");
+    const invNum = document.getElementById("invoiceNumber").innerText || "Invoice";
 
     const opt = {
-
-        margin: [8, 8, 8, 8],
-
-        filename: `Invoice-${document.getElementById("invoiceNumber").innerText}.pdf`,
-
-        image: {
-            type: "jpeg",
-            quality: 1
-        },
-
-        html2canvas: {
-            scale: 3,
-            useCORS: true,
-            scrollY: 0
-        },
-
-        jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait"
-        },
-
-        pagebreak: {
-            mode: ["avoid-all", "css", "legacy"]
-        }
-
+        margin: [6, 6, 6, 6],
+        filename: `Invoice-${invNum}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
     };
 
     html2pdf().set(opt).from(invoice).save();
-
 });
