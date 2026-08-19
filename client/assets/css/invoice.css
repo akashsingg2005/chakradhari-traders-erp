@@ -238,11 +238,13 @@ body {
 /* Items Table */
 .table-responsive {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin-bottom: 25px;
 }
 
 table {
     width: 100%;
+    min-width: 500px;
     border-collapse: collapse;
     font-size: 13px;
 }
@@ -414,6 +416,88 @@ table td.col-rate, table td.col-amount {
 
 .sign-space {
     height: 50px;
+}
+
+/* Responsive Media Queries */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 12px;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+        justify-content: stretch;
+        gap: 8px;
+    }
+
+    .buttons button {
+        flex: 1 1 auto;
+        justify-content: center;
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .invoice-container {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    .summary-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .invoice-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .invoice-badge-box {
+        text-align: left;
+        padding-top: 10px;
+        border-top: 1px dashed #e2e8f0;
+    }
+
+    .invoice-title {
+        font-size: 24px;
+        margin-bottom: 6px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .business-info {
+        gap: 12px;
+    }
+
+    .business-badge {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+        border-radius: 10px;
+    }
+
+    .business-info h1 {
+        font-size: 20px;
+    }
+
+    table th, table td {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+    .total-box {
+        padding: 14px;
+    }
+
+    .grand-total {
+        font-size: 15px;
+    }
 }
 
 /* Print Styles */
