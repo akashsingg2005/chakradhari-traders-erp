@@ -4,6 +4,7 @@ const token = localStorage.getItem("token");
 const businessId = localStorage.getItem("businessId");
 
 let report = {};
+let allIncomePayments = [];
 
 // ==============================
 // START
@@ -112,6 +113,10 @@ async function loadReport(){
 
         document.getElementById("deliveredWorks").innerText =
         report.deliveredWorks;
+
+        allIncomePayments = report.incomePayments || [];
+
+        renderMonthlyIncome(allIncomePayments);
 
         createChart();
 
@@ -254,4 +259,143 @@ function downloadReport(){
 
     );
 
+}
+
+// ==============================
+// MONTHLY INCOME BREAKDOWN
+// ==============================
+
+function renderMonthlyIncome(payments){
+    const container = document.getElementById("monthlyIncomeList");
+    const filterSelect = document.getElementById("monthIncomeFilter");
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    if(!payments || payments.length === 0){
+        container.innerHTML = `
+            <div class="month-card" style="padding: 20px; text-align: center; color: #6b7280;">
+                No Income Payments Found
+            </div>
+        `;
+        return;
+    }
+
+    const grouped = {};
+    payments.forEach(payment => {
+        const date = new Date(payment.createdAt);
+        const monthKey = date.toLocaleString("en-IN", { month: "long", year: "numeric" });
+        if(!grouped[monthKey]){
+            grouped[monthKey] = [];
+        }
+        grouped[monthKey].push(payment);
+    });
+
+    if(filterSelect && filterSelect.options.length <= 1){
+        filterSelect.innerHTML = `<option value="All">All Months</option>`;
+        Object.keys(grouped).forEach(mKey => {
+            filterSelect.innerHTML += `<option value="${mKey}">${mKey}</option>`;
+        });
+    }
+
+    const selectedFilter = filterSelect ? filterSelect.value : "All";
+
+    Object.keys(grouped).forEach((month, index) => {
+        if(selectedFilter !== "All" && selectedFilter !== month){
+            return;
+        }
+
+        let monthTotal = 0;
+        grouped[month].forEach(p => {
+            monthTotal += Number(p.amount || 0);
+        });
+
+        let itemsHtml = "";
+        grouped[month].forEach(p => {
+            const custName = (p.customer && p.customer.name) ? p.customer.name : "Customer";
+            const workName = (p.work && p.work.workName) ? p.work.workName : "";
+            const pDate = new Date(p.createdAt).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            });
+
+            itemsHtml += `
+                <div class="income-item-card">
+                    <div class="income-item-info">
+                        <h4>${custName} ${workName ? `• ${workName}` : ""}</h4>
+                        <p>${p.paymentMethod || "Cash"} • ${pDate} ${p.notes ? `• ${p.notes}` : ""}</p>
+                    </div>
+                    <div class="income-item-amount">
+                        +₹${Number(p.amount || 0).toLocaleString()}
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML += `
+            <div class="month-card">
+                <div class="month-header" onclick="toggleIncomeMonth('incMonth${index}')">
+                    <div class="month-left">
+                        <i class="fa-solid fa-chevron-down"></i>
+                        <h3>${month}</h3>
+                    </div>
+                    <div class="month-total-income">
+                        ₹${monthTotal.toLocaleString()}
+                    </div>
+                </div>
+                <div class="month-body" id="incMonth${index}">
+                    ${itemsHtml}
+                </div>
+            </div>
+        `;
+    });
+
+    const firstMonthBody = container.querySelector(".month-body");
+    if(firstMonthBody){
+        firstMonthBody.classList.add("show");
+        const icon = firstMonthBody.previousElementSibling.querySelector("i");
+        if(icon){
+            icon.classList.remove("fa-chevron-down");
+            icon.classList.add("fa-chevron-up");
+        }
+    }
+}
+
+function toggleIncomeMonth(id){
+    const current = document.getElementById(id);
+    if(!current) return;
+    const parentContainer = document.getElementById("monthlyIncomeList");
+    const bodies = parentContainer.querySelectorAll(".month-body");
+    const icons = parentContainer.querySelectorAll(".month-header i");
+
+    bodies.forEach(b => {
+        if(b.id !== id){
+            b.classList.remove("show");
+        }
+    });
+
+    icons.forEach(ic => {
+        ic.classList.remove("fa-chevron-up");
+        ic.classList.add("fa-chevron-down");
+    });
+
+    const icon = current.previousElementSibling.querySelector("i");
+    if(current.classList.contains("show")){
+        current.classList.remove("show");
+        if(icon){
+            icon.classList.remove("fa-chevron-up");
+            icon.classList.add("fa-chevron-down");
+        }
+    } else {
+        current.classList.add("show");
+        if(icon){
+            icon.classList.remove("fa-chevron-down");
+            icon.classList.add("fa-chevron-up");
+        }
+    }
+}
+
+function filterMonthlyIncome(){
+    renderMonthlyIncome(allIncomePayments);
 }

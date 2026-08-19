@@ -133,7 +133,13 @@ exports.getReport = async (req, res) => {
 
             paymentType: "Received"
 
-        });
+        })
+
+        .populate("customer", "name")
+
+        .populate("work", "workName")
+
+        .sort({ createdAt: -1 });
 
         let totalIncome = 0;
 
@@ -369,7 +375,9 @@ exports.getReport = async (req, res) => {
 
                 readyWorks,
 
-                deliveredWorks
+                deliveredWorks,
+
+                incomePayments
 
             }
 

@@ -444,3 +444,123 @@ body{
 }
 
 }
+
+/* ===========================
+   MONTHLY INCOME SECTION
+=========================== */
+
+.month-income-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+#monthIncomeFilter{
+    padding:10px 16px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+    font-size:14px;
+    outline:none;
+    background:#fff;
+    color:#111827;
+    cursor:pointer;
+    min-width:160px;
+}
+
+.month-card{
+    background:#fff;
+    border-radius:16px;
+    margin-bottom:14px;
+    border:1px solid #e5e7eb;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.04);
+    transition:.3s;
+}
+
+.month-card:hover{
+    border-color:#cbd5e1;
+}
+
+.month-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 20px;
+    cursor:pointer;
+    background:#fafafa;
+    transition:.25s;
+}
+
+.month-header:hover{
+    background:#f1f5f9;
+}
+
+.month-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.month-left i{
+    color:#2563eb;
+    transition:.3s;
+    font-size:15px;
+}
+
+.month-left h3{
+    font-size:17px;
+    color:#111827;
+    margin:0;
+}
+
+.month-total-income{
+    color:#16a34a;
+    font-size:18px;
+    font-weight:700;
+}
+
+.month-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    padding:0 18px;
+}
+
+.month-body.show{
+    max-height:300000px;
+    padding:0 18px 18px;
+}
+
+.income-item-card{
+    background:#f8fafc;
+    border-radius:12px;
+    padding:14px 16px;
+    margin-top:12px;
+    border-left:4px solid #16a34a;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.income-item-info h4{
+    font-size:15px;
+    color:#111827;
+    margin:0 0 4px 0;
+}
+
+.income-item-info p{
+    font-size:13px;
+    color:#6b7280;
+    margin:0;
+}
+
+.income-item-amount{
+    font-size:18px;
+    font-weight:700;
+    color:#16a34a;
+}
